@@ -1,0 +1,25 @@
+body {
+    background-color: #f8fdae;
+}
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size-adjust: 20px;
+    color: brown;
+    text-align: center;
+    background-image: url("../img/header.jpeg");
+}
+p {
+    font-size: 14px;
+}
+button {
+    padding: 10px;
+    border: 2px solid black;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.inline-block {
+    display: inline-block;
+}
+.inline-block img {
+    width: 350px;
+}
