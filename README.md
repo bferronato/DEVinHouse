@@ -1,2 +1,3 @@
 # DEVinHouse
-Curso DEVinHouse SENAI - ACATE - SOFTPLAN
+Curso DEVinHouse \
+SENAI - ACATE - SOFTPLAN
