@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV in House</title>
+    <script>
+
+        var msg;
+        var nome = prompt("Digite o seu nome");
+        var idade = prompt("Digite a sua idade");
+        var praticaEsporte = confirm("Gosta de praticar algum esporte?");
+
+        msg = "Nome: " + nome.toString() + "\n" +
+              "Idade: " + parseInt(idade) + "\n" +
+              "Pratica esportes: " + Boolean(praticaEsporte);
+
+        console.log(msg);
+
+    </script>
+</head>
+<body>
+    <h1>Semana 2</h1>
+    <p>Pergunte ao usuário:<br>
+        nome (prompt), idade (prompt) e se gosta de praticar algum esporte (confirm).<br>
+        Crie 3 variáveis para guardar as respostas do usuário: uma deve receber um valor textual (string), outra deve receber um valor numérico (number), e outra um valor de verdadeiro ou falso (boolean).<br>
+        Faça com que esses 3 valores sejam exibidos no console do navegador.</p>
+</body>
+</html>

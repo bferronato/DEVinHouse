@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV in House</title>
+    <script>
+        var calcular = function() {
+
+            var resultado;
+            var parImpar;
+            var numero = document.getElementById("numero").value;
+
+            if (isNaN(numero)) {
+                resultado = "Digite um número válido.";
+            } else {
+                // Verifica se o número é par ou ímpar
+                parImpar = (numero % 2 == 0);
+                if(parImpar) {
+                    resultado = "O número é par.";
+                } else {
+                    resultado = "O número é ímpar." ;
+                }
+            }
+
+            // Seta o resultado na página
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Semana 2</h1>
+
+    <input id="numero" type="text" maxlength="15">
+    <p>
+        <span id="resultado"></span>
+    </p>
+
+    <button onclick="calcular()">Calcular</button>
+    <p>Em uma página HTML, insira um campo de texto para que o usuário insira um número. <br>
+    Programe uma função em JavaScript para verificar se o número inserido pelo usuário é par ou ímpar, e informe o usuário através de um texto na página HTML.</p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV in House</title>
+    <script>
+
+        var msg;
+        var idadeCompleta;
+        var idadeIncompleta;
+        var dataNascimento = prompt("Digite sua data de nascimento", "dd/mm/yyyy");
+        var anoAtual = prompt("Digite o ano atual", "2020");
+
+        var dataNacimentoPartes = dataNascimento.split("/");
+        var diaNascimento = parseInt(dataNacimentoPartes[0], 10);
+        var mesNascimento = parseInt(dataNacimentoPartes[1], 10);
+        var anoNascimento = parseInt(dataNacimentoPartes[2], 10);
+
+        var hoje = new Date();
+        var dataNascimentoCompara = new Date(anoNascimento, mesNascimento, diaNascimento);
+        
+        idadeCompleta = idadeIncompleta = hoje.getFullYear() - anoNascimento;
+
+        if(mesNascimento >= (hoje.getMonth() + 1)) {
+            if(diaNascimento > hoje.getDate()) {
+                // Diminui a idade pois ainda não fez aniversário
+                idadeIncompleta--
+            }
+        }
+
+        msg = "Sua idade é " + idadeCompleta + " ou " + idadeIncompleta;
+
+        alert(msg)
+
+    </script>
+</head>
+<body>
+    <h1>Semana 2</h1>
+    <p>Faça 2 prompts ao usuário:<br>
+        No primeiro, pergunte o ano de nascimento.<br>
+        No segundo, pergunte o ano atual.<br>
+        Em seguida, exiba na tela um alert contendo o texto “Sua idade é x ou y”, onde x é a idade do usuário caso ele já tenha feito aniversário neste ano, e y é a idade caso ele ainda não tenha aniversariado no ano corrente.</p>
+</body>
+</html>
