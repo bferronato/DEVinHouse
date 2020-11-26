@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV in House</title>
+    <script>
+
+        var calcularIdade = function() {
+            var hoje = new Date();
+            var dataAux = document.getElementById("dataNascimento").value;
+            var dataNascimento = new Date(dataAux);
+
+            var idade = hoje.getFullYear() - dataNascimento.getFullYear();
+
+            // Seta o resultado na página
+            document.getElementById("resultado").innerHTML = idade;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Semana 2</h1>
+    <label for="dataNascimento">Insira sua data de nascimento</label>
+    <input id="dataNascimento" type="date" value="">
+    <button onclick="calcularIdade()">Calcular idade</button>
+    <p>Idade: <span id="resultado"></span></p>
+    <p>Faça uma página HTML contendo um label que exiba a mensagem “Insira sua data de nascimento”,<br>
+        um campo de texto que só permita inserir data (dica: input type date) e um botão rotulado “calcular idade”.<br>
+        Programe uma função a ser executada quando o usuário clicar no botão, que faça o cálculo da idade do usuário,<br>
+        e então exiba a idade em um texto na página HTML.</p>
+</body>
+</html>
