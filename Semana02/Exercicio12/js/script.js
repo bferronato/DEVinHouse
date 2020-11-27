@@ -1,4 +1,4 @@
 var agora = new Date();
-var horaAcesso = agora.toLocaleTimeString('pt-br', {hour: '2-digit', minute: '2-digit', hour12: false});
+var horaAcesso = agora.toLocaleTimeString([], {timeStyle: 'short'});
 
 document.getElementById("resultado").innerHTML = horaAcesso;
