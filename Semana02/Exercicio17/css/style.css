@@ -1,0 +1,23 @@
+main {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+main > div.buttons {
+    display: flex;
+    justify-content:space-between;
+}
+
+main > div.buttons > button {
+    width: 32.5%;
+}
+
+main label, input, button, select {
+    margin: 2px 0;
+}
+
+select {
+    width: 100%;
+    height: 200px;
+}

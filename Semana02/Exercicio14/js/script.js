@@ -23,6 +23,8 @@ function atualizarEstacao(estacao) {
     var estacaoImgAlt = document.getElementsByClassName("estacaoImg")[0].alt = estacao.nome;
 }
 
+// todo http://www.fiocruz.br/biosseguranca/Bis/infantil/estacoes-ano.htm
+
 function obterEstacao() {
     var hoje = new Date();
     var mes = hoje.getMonth() + 1;
