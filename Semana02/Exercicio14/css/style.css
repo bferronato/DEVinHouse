@@ -1,9 +1,9 @@
 .estacao {
     display: flex;
     flex-flow: column;
-    align-items: center;
-    width: 20%;
-    text-align: center;
+    align-items: start;
+    width: 100vw;
+    text-align: left;
 }
 .estacaoNome {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

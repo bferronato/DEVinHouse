@@ -23,29 +23,34 @@ function atualizarEstacao(estacao) {
     var estacaoImgAlt = document.getElementsByClassName("estacaoImg")[0].alt = estacao.nome;
 }
 
-// todo http://www.fiocruz.br/biosseguranca/Bis/infantil/estacoes-ano.htm
-
 function obterEstacao() {
     var hoje = new Date();
     var mes = hoje.getMonth() + 1;
     var estacao;
 
-    if (mes >= 12 || mes < 3) {
-        estacao = estacoes['verao'];
+    switch (mes) {
+        case 1:
+        case 2:
+        case 12:
+            estacao = estacoes['verao'];
+            break;
+        case 3:
+        case 4:
+        case 5:
+            estacao = estacoes['outono'];
+            break;
+        case 6:
+        case 7:
+        case 8:
+            estacao = estacoes['inverno'];
+            break;
+        case 9:
+        case 10:
+        case 11:
+            estacao = estacoes['primavera'];
+            break;
     }
 
-    if (mes >= 3 && mes < 6) {
-        estacao = estacoes['outono'];
-    }
-
-    if (mes >= 6 && mes < 9) {
-        estacao = estacoes['inverno'];
-    }
-    
-    if (mes >= 9 && mes < 12) {
-        estacao = estacoes['primavera'];
-    } 
-    
     atualizarEstacao(estacao);
 }
 
