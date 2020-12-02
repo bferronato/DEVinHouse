@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nerko+One&display=swap");
+@import url("./fontawesome-free-5.15.1-web/css/fontawesome.css");
+@import url("./fontawesome-free-5.15.1-web/css/solid.css");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40vw;
+  margin: 4vw auto;
+}
+
+main header {
+  width: 100%;
+}
+
+main h1 {
+  color: white;
+  background-image: -webkit-gradient(linear, left top, right top, from(#f06d06), color-stop(#f63573), color-stop(#7028b6), to(#092bdc));
+  background-image: linear-gradient(to right, #f06d06, #f63573, #7028b6, #092bdc);
+  padding: 0.5em 0;
+  border-radius: 0.25em;
+  width: 100%;
+  text-align: center;
+  font-family: 'Nerko One', cursive;
+}
+
+main .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin: 2em 0 1em;
+}
+
+main .form input {
+  width: 100%;
+  padding: 0.5em 0;
+  line-height: 1em;
+  font-size: 1em;
+  border: 0.0625em solid #ff8817;
+  border-radius: 0.25em;
+  text-indent: 1em;
+  color: #ff8817;
+}
+
+main .form input::-webkit-input-placeholder {
+  color: #ff8717;
+}
+
+main .form input:-ms-input-placeholder {
+  color: #ff8717;
+}
+
+main .form input::-ms-input-placeholder {
+  color: #ff8717;
+}
+
+main .form input::placeholder {
+  color: #ff8717;
+}
+
+main .form input:focus {
+  outline: none !important;
+  -webkit-box-shadow: 0 0 0.625em #b1afaf;
+          box-shadow: 0 0 0.625em #b1afaf;
+  border: 0.0625em solid #ff8817;
+}
+
+main .form button {
+  margin-left: -20%;
+  color: #7028b6;
+  width: 20%;
+}
+
+main .lista-tarefas {
+  width: 100%;
+  text-align: left;
+}
+
+main .lista-tarefas ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  list-style: none;
+  padding: 0.25em;
+  border-bottom: 0.0625em solid #e0e0e0;
+  padding: 0.625em;
+  color: #092bdc;
+}
+
+main .lista-tarefas ul li div label {
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+main .lista-tarefas ul li i {
+  color: #f63573;
+  cursor: pointer;
+}
+
+main .lista-tarefas ul li input:checked ~ label {
+  text-decoration: line-through;
+  text-decoration-thickness: 12%;
+}
+
+main .lista-tarefas h4 {
+  margin-top: 0.5em;
+  text-align: center;
+  color: #7028b6;
+}
