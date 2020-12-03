@@ -16,7 +16,7 @@ main {
     justify-content: center;
     align-items: center;
     width: 40vw;
-    margin: 4vw auto;
+    margin: 2vw auto;
 
     & header {
         width: 100%;
@@ -95,6 +95,11 @@ main {
                 text-decoration: line-through;
                 text-decoration-thickness: 12%;
             }
+
+        }
+
+        & ul li.selecionado {
+            border-left: 2px solid #ff8817;
         }
 
         & h4 {

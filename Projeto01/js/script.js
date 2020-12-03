@@ -7,29 +7,28 @@
         carregarLista();
     };
 
-    window.addEventListener("keydown", function (event) {
+    window.addEventListener("keyup", function (event) {
         if (event.defaultPrevented) {
             return;
         }
-
+        
         if (event.key == "/") {
             document.getElementById("todo").focus();
+        } if (event.key == "Enter") {
+            adicionarItem();
+        } else if (event.key == "j" && !(document.activeElement === document.getElementById('todo'))) {
+            navegar(1);
+        } else if (event.key == "k" && !(document.activeElement === document.getElementById('todo'))) {
+            navegar(-1);
+        } else if (event.key == "Delete" && !(document.activeElement === document.getElementById('todo'))) {
+            excluirItemTeclado();
+        } else if (event.key == "x" && !(document.activeElement === document.getElementById('todo'))) {
+            concluirItemTeclado();
         } else if (event.key == "Escape") {
+            document.getElementById("todo").value = "";
             document.getElementById("todo").blur();
         } else {
             return;
-        }
-
-        event.preventDefault();
-    }, true);
-
-    todo.addEventListener("keyup", function (event) {
-        if (event.defaultPrevented) {
-            return;
-        }
-
-        if (event.key == "Enter") {
-            adicionarItem();
         }
 
         event.preventDefault();
@@ -50,11 +49,11 @@
         if (validarAdicionarItem(itens, item)) {
 
             document.getElementById("todo").value = "";
-            itens.push({ "nome": item, "concluido": false });
+            itens.push({ "nome": item, "concluido": false, "selecionado": false });
 
-            localStorage.setItem("itens", JSON.stringify(itens));
-
-            carregarLista();
+            salvarLista(itens, carregarLista);
+            // localStorage.setItem("itens", JSON.stringify(itens));
+            // carregarLista();
         }
     }
 
@@ -79,6 +78,8 @@
         if (localStorage.hasOwnProperty("itens")) {
             itens = JSON.parse(localStorage.getItem("itens"));
         }
+
+        // itens.sort((a, b) => (a.concluido > b.concluido) ? 1 : ((b.concluido > a.concluido) ? -1 : 0));
 
         montarLista(itens);
     }
@@ -119,6 +120,9 @@
             divIcone.appendChild(iconeExcluir);
 
             let li = document.createElement("li");
+            if(item.selecionado) {
+                li.classList.add("selecionado");
+            }
             li.appendChild(divItem);
             li.appendChild(divIcone);
 
@@ -134,29 +138,99 @@
         }
     }
 
-    let excluirItem = function(item) {
+    let salvarLista = function(itens, callback) {
+
+        itens.sort((a, b) => (a.concluido > b.concluido) ? 1 : ((b.concluido > a.concluido) ? -1 : 0));
+        localStorage.setItem("itens", JSON.stringify(itens));
+        
+        if(callback) {
+            callback();
+        }
+    }
+
+    let excluirItem = function (item) {
 
         let itens = JSON.parse(localStorage.getItem("itens"));
         let itemExcluir = itens.findIndex(x => x.nome == item);
 
         let confirmaExclusao = confirm(`Deseja realmente excluir o item ${item}?`);
-        if(confirmaExclusao) {
+        if (confirmaExclusao) {
             itens.splice(itemExcluir, 1);
         }
 
-        localStorage.setItem("itens", JSON.stringify(itens));
-        carregarLista();
+        salvarLista(itens, carregarLista);
+        // localStorage.setItem("itens", JSON.stringify(itens));
+        // carregarLista();
     }
     
-    let concluirItem = function(item) {
+    let excluirItemTeclado = function () {
+
+        let itens = JSON.parse(localStorage.getItem("itens"));
+        let itemExcluir = itens.find(x => x.selecionado == true);
+
+        // localStorage.setItem("itens", JSON.stringify(itens));
+
+        if(itemExcluir) {
+            excluirItem(itemExcluir.nome);
+        }
+    }
+
+    let concluirItem = function (item) {
 
         let itens = JSON.parse(localStorage.getItem("itens"));
         let itemConcluir = itens.findIndex(x => x.nome == item);
 
         itens[itemConcluir].concluido = !itens[itemConcluir].concluido;
 
-        localStorage.setItem("itens", JSON.stringify(itens));
-        carregarLista();
+        salvarLista(itens, carregarLista);
+        // localStorage.setItem("itens", JSON.stringify(itens));
+        // carregarLista();
     }
-    
+
+    let concluirItemTeclado = function () {
+
+        let itens = JSON.parse(localStorage.getItem("itens"));
+        let itemConcluir = itens.find(x => x.selecionado == true);
+
+        // localStorage.setItem("itens", JSON.stringify(itens));
+
+        if(itemConcluir) {
+            concluirItem(itemConcluir.nome);
+        }
+    }
+
+    let navegar = function (direcao) {
+
+        let itens = JSON.parse(localStorage.getItem("itens"));
+        let itemSelecionar = itens.findIndex(x => x.selecionado == true);
+
+        itens.forEach(function (item, i) {
+            item.selecionado = false;
+        });
+
+        if(itemSelecionar <= 0 && direcao < 0) {
+            itens[0].selecionado = true;
+        } else if (itemSelecionar == (itens.length - 1) && direcao > 0) {
+            itens[itens.length - 1].selecionado = true;
+        } else {
+            itens[itemSelecionar + direcao].selecionado = true;
+        }
+
+        let proximoSelecionar = itens.findIndex(x => x.selecionado == true);
+
+
+        let limpaListaTarefas = document.querySelectorAll(".lista-tarefas ul li");
+        limpaListaTarefas.forEach(function(item) {
+            item.classList.remove("selecionado");
+        });
+        
+
+        let listaTarefas = document.querySelector(`.lista-tarefas ul li:nth-child(${proximoSelecionar+1})`);
+
+        listaTarefas.classList.add("selecionado");
+
+        salvarLista(itens);
+        // localStorage.setItem("itens", JSON.stringify(itens));
+    }
+
 })();

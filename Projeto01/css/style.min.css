@@ -24,7 +24,7 @@ main {
       -ms-flex-align: center;
           align-items: center;
   width: 40vw;
-  margin: 4vw auto;
+  margin: 2vw auto;
 }
 
 main header {
@@ -133,6 +133,10 @@ main .lista-tarefas ul li i {
 main .lista-tarefas ul li input:checked ~ label {
   text-decoration: line-through;
   text-decoration-thickness: 12%;
+}
+
+main .lista-tarefas ul li.selecionado {
+  border-left: 2px solid #ff8817;
 }
 
 main .lista-tarefas h4 {
