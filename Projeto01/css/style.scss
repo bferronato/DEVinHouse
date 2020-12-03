@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nerko+One&display=swap");
 @import url("./fontawesome-free-5.15.1-web/css/fontawesome.css");
 @import url("./fontawesome-free-5.15.1-web/css/solid.css");
 
@@ -21,7 +21,7 @@ main {
     & header {
         width: 100%;
     }
-    
+
     & h1 {
         color: white;
         background-image: linear-gradient(to right, #f06d06, #f63573, #7028b6, #092bdc);
@@ -29,7 +29,7 @@ main {
         border-radius: 0.25em;
         width: 100%;
         text-align: center;
-        font-family: 'Nerko One', cursive;
+        font-family: "Nerko One", cursive;
     }
 
     & .form {
@@ -37,7 +37,7 @@ main {
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        margin: 2em 0 1em;
+        margin: 2em 0 0.1em;
 
         & input {
             width: 100%;
@@ -64,6 +64,25 @@ main {
             margin-left: -20%;
             color: #7028b6;
             width: 20%;
+        }
+    }
+
+    & .atalhos {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 0.625em;
+        
+        & div {
+            padding: 1em;
+            color: rgb(177, 175, 175);
+            text-align: center;
+
+            & .teclaAtalho {
+                color: #f63573;
+            }
         }
     }
 
@@ -95,11 +114,10 @@ main {
                 text-decoration: line-through;
                 text-decoration-thickness: 12%;
             }
-
         }
 
         & ul li.selecionado {
-            border-left: 2px solid #ff8817;
+            border-left: 0.125em solid #ff8817;
         }
 
         & h4 {
