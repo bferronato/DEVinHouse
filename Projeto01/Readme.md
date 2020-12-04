@@ -2,7 +2,7 @@
 Acesso online:
 https://devinhouse-todo-list.herokuapp.com/index.html
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/bferronato/DEVinHouse/blob/main/Projeto01/img/preview.png?raw=true)
 
 Você está participando de um processo seletivo para ingressar numa vaga de programador em uma grande empresa de TI. Uma das etapas do processo envolve a criação de uma aplicação web de lista de afazeres (“to-do list”).
 ---
