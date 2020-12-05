@@ -1,8 +1,9 @@
 
-Acesso online:
-https://devinhouse-tarefas.herokuapp.com
+Acesso online
 
-![alt text](https://github.com/bferronato/DEVinHouse/blob/main/Projeto01/img/preview.png?raw=true)
+<a href="https://devinhouse-tarefas.herokuapp.com" target="_blank">https://devinhouse-tarefas.herokuapp.com</a>
+
+![DEVinHouse](https://github.com/bferronato/DEVinHouse/blob/main/Projeto01/img/preview.png?raw=true)
 
 Você está participando de um processo seletivo para ingressar numa vaga de programador em uma grande empresa de TI. Uma das etapas do processo envolve a criação de uma aplicação web de lista de afazeres (“to-do list”).
 ---
