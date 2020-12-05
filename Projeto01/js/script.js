@@ -214,6 +214,10 @@
         let tarefas = JSON.parse(localStorage.getItem("tarefas"));
         let tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
 
+        if (tarefaSelecionar < 0) {
+            return;
+        }
+
         tarefas.forEach(function (tarefa, i) {
             tarefa.selecionado = false;
         });
