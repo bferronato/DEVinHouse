@@ -1,6 +1,6 @@
 
 Acesso online:
-https://devinhouse-todo-list.herokuapp.com/index.html
+https://devinhouse-tarefas.herokuapp.com
 
 ![alt text](https://github.com/bferronato/DEVinHouse/blob/main/Projeto01/img/preview.png?raw=true)
 
