@@ -12,20 +12,20 @@
         }
 
         if (event.key == "/") {
-            document.getElementById("todo").focus();
-        } if (event.key == "Enter") {
-            adicionarItem();
-        } else if (event.key == "j" && !(document.activeElement === document.getElementById('todo'))) {
+            document.getElementById("tarefa").focus();
+        } if (event.key == "Enter" && (document.activeElement === document.getElementById('tarefa'))) {
+            adicionarTarefa();
+        } else if (event.key == "j" && !(document.activeElement === document.getElementById('tarefa'))) {
             navegar(1);
-        } else if (event.key == "k" && !(document.activeElement === document.getElementById('todo'))) {
+        } else if (event.key == "k" && !(document.activeElement === document.getElementById('tarefa'))) {
             navegar(-1);
-        } else if (event.key == "Delete" && !(document.activeElement === document.getElementById('todo'))) {
-            excluirItemAtalho();
-        } else if (event.key == "x" && !(document.activeElement === document.getElementById('todo'))) {
-            concluirItemAtalho();
+        } else if (event.key == "Delete" && !(document.activeElement === document.getElementById('tarefa'))) {
+            excluirTarefaAtalho();
+        } else if (event.key == "x" && !(document.activeElement === document.getElementById('tarefa'))) {
+            concluirTarefaAtalho();
         } else if (event.key == "Escape") {
-            document.getElementById("todo").value = "";
-            document.getElementById("todo").blur();
+            document.getElementById("tarefa").value = "";
+            document.getElementById("tarefa").blur();
         } else {
             return;
         }
@@ -34,35 +34,35 @@
     }, true);
 
     adicionar.addEventListener("click", function () {
-        adicionarItem();
+        adicionarTarefa();
     });
 
-    let adicionarItem = function () {
-        let itens = new Array();
-        let item = document.getElementById("todo").value;
+    let adicionarTarefa = function () {
+        let tarefas = new Array();
+        let tarefa = document.getElementById("tarefa").value.trim();
 
-        if (localStorage.hasOwnProperty("itens")) {
-            itens = JSON.parse(localStorage.getItem("itens"));
+        if (localStorage.hasOwnProperty("tarefas")) {
+            tarefas = JSON.parse(localStorage.getItem("tarefas"));
         }
 
-        if (validarAdicionarItem(itens, item)) {
+        if (validarAdicionarTarefa(tarefas, tarefa)) {
 
-            document.getElementById("todo").value = "";
-            itens.push({ "nome": item, "concluido": false, "selecionado": false });
+            document.getElementById("tarefa").value = "";
+            tarefas.push({ "nome": tarefa, "concluido": false, "selecionado": false });
 
-            salvarLista(itens, carregarLista);
+            salvarLista(tarefas, carregarLista);
         }
     }
 
-    let validarAdicionarItem = function (itens, item) {
+    let validarAdicionarTarefa = function (tarefas, tarefa) {
 
-        if (item.length === 0) {
-            alert("O nome do item não pode ser vazio.");
+        if (tarefa.length === 0) {
+            alert("O nome da tarefa não pode ser vazio.");
             return false;
         }
 
-        if (itens.some(e => e.nome.toLowerCase() === item.toLowerCase())) {
-            alert("O item já está cadastrado na sua lista.");
+        if (tarefas.some(e => e.nome.toLowerCase() === tarefa.toLowerCase())) {
+            alert("A tarefa já está cadastrada na sua lista.");
             return false;
         }
 
@@ -70,150 +70,150 @@
     }
 
     let carregarLista = function () {
-        let itens = new Array();
+        let tarefas = new Array();
 
-        if (localStorage.hasOwnProperty("itens")) {
-            itens = JSON.parse(localStorage.getItem("itens"));
+        if (localStorage.hasOwnProperty("tarefas")) {
+            tarefas = JSON.parse(localStorage.getItem("tarefas"));
         }
 
-        montarLista(itens);
+        montarLista(tarefas);
     }
 
-    let montarLista = function (itens) {
+    let montarLista = function (tarefas) {
         let listaTarefas = document.querySelector(".lista-tarefas");
         listaTarefas.innerHTML = "";
         let ul = document.createElement("ul");
 
-        itens.forEach(function (item, i) {
+        tarefas.forEach(function (tarefa, i) {
 
-            let id = "item-" + i;
-            let nome = item.nome;
+            let id = "tarefa-" + i;
+            let nome = tarefa.nome;
 
             let checkbox = document.createElement("input");
             checkbox.id = id;
             checkbox.type = "checkbox";
-            checkbox.checked = item.concluido;
+            checkbox.checked = tarefa.concluido;
             checkbox.addEventListener("click", function () {
-                concluirItem(nome);
+                concluirTarefa(nome);
             });
 
             let label = document.createElement("label");
             label.innerHTML = nome;
             label.setAttribute("for", id);
 
-            let divItem = document.createElement("div");
-            divItem.appendChild(checkbox);
-            divItem.appendChild(label);
+            let divTarefa = document.createElement("div");
+            divTarefa.appendChild(checkbox);
+            divTarefa.appendChild(label);
 
             let iconeExcluir = document.createElement("i");
-            iconeExcluir.classList.add("fas", "fa-trash-alt", "excluirItem");
+            iconeExcluir.classList.add("fas", "fa-trash-alt");
             iconeExcluir.addEventListener("click", function () {
-                excluirItem(nome);
+                excluirTarefa(nome);
             });
 
             let divIcone = document.createElement("div");
             divIcone.appendChild(iconeExcluir);
 
             let li = document.createElement("li");
-            if (item.selecionado) {
+            if (tarefa.selecionado) {
                 li.classList.add("selecionado");
             }
-            li.appendChild(divItem);
+            li.appendChild(divTarefa);
             li.appendChild(divIcone);
 
             ul.appendChild(li);
         });
 
-        if (itens.length > 0) {
+        if (tarefas.length > 0) {
             listaTarefas.appendChild(ul);
         } else {
             let listaVazia = document.createElement("h4");
-            listaVazia.innerHTML = "Nenhum item adicionado a sua lista.";
+            listaVazia.innerHTML = "Nenhuma tarefa adicionada a sua lista.";
             listaTarefas.appendChild(listaVazia);
         }
     }
 
-    let salvarLista = function (itens, callback) {
+    let salvarLista = function (tarefas, callback) {
 
-        itens.sort((a, b) => (a.concluido > b.concluido) ? 1 : ((b.concluido > a.concluido) ? -1 : 0));
-        localStorage.setItem("itens", JSON.stringify(itens));
+        tarefas.sort((a, b) => (a.concluido > b.concluido) ? 1 : ((b.concluido > a.concluido) ? -1 : 0));
+        localStorage.setItem("tarefas", JSON.stringify(tarefas));
 
         if (callback) {
             callback();
         }
     }
 
-    let excluirItem = function (item) {
+    let excluirTarefa = function (tarefa) {
 
-        let itens = JSON.parse(localStorage.getItem("itens"));
-        let itemExcluir = itens.findIndex(x => x.nome == item);
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaExcluir = tarefas.findIndex(x => x.nome == tarefa);
 
-        let confirmaExclusao = confirm(`Deseja realmente excluir o item ${item}?`);
+        let confirmaExclusao = confirm(`Deseja realmente excluir a tarefa "${tarefa}"?`);
         if (confirmaExclusao) {
-            itens.splice(itemExcluir, 1);
+            tarefas.splice(tarefaExcluir, 1);
         }
 
-        salvarLista(itens, carregarLista);
+        salvarLista(tarefas, carregarLista);
     }
 
-    let excluirItemAtalho = function () {
+    let excluirTarefaAtalho = function () {
 
-        let itens = JSON.parse(localStorage.getItem("itens"));
-        let itemExcluir = itens.find(x => x.selecionado == true);
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaExcluir = tarefas.find(x => x.selecionado == true);
 
-        if (itemExcluir) {
-            excluirItem(itemExcluir.nome);
+        if (tarefaExcluir) {
+            excluirTarefa(tarefaExcluir.nome);
         }
     }
 
-    let concluirItem = function (item) {
+    let concluirTarefa = function (tarefa) {
 
-        let itens = JSON.parse(localStorage.getItem("itens"));
-        let itemConcluir = itens.findIndex(x => x.nome == item);
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaConcluir = tarefas.findIndex(x => x.nome == tarefa);
 
-        itens[itemConcluir].concluido = !itens[itemConcluir].concluido;
+        tarefas[tarefaConcluir].concluido = !tarefas[tarefaConcluir].concluido;
 
-        salvarLista(itens, carregarLista);
+        salvarLista(tarefas, carregarLista);
     }
 
-    let concluirItemAtalho = function () {
+    let concluirTarefaAtalho = function () {
 
-        let itens = JSON.parse(localStorage.getItem("itens"));
-        let itemConcluir = itens.find(x => x.selecionado == true);
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaConcluir = tarefas.find(x => x.selecionado == true);
 
-        if (itemConcluir) {
-            concluirItem(itemConcluir.nome);
+        if (tarefaConcluir) {
+            concluirTarefa(tarefaConcluir.nome);
         }
     }
 
     let navegar = function (direcao) {
 
-        let itens = JSON.parse(localStorage.getItem("itens"));
-        let itemSelecionar = itens.findIndex(x => x.selecionado == true);
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
 
-        itens.forEach(function (item, i) {
-            item.selecionado = false;
+        tarefas.forEach(function (tarefa, i) {
+            tarefa.selecionado = false;
         });
 
-        if (itemSelecionar <= 0 && direcao < 0) {
-            itens[0].selecionado = true;
-        } else if (itemSelecionar == (itens.length - 1) && direcao > 0) {
-            itens[itens.length - 1].selecionado = true;
+        if (tarefaSelecionar <= 0 && direcao < 0) {
+            tarefas[0].selecionado = true;
+        } else if (tarefaSelecionar == (tarefas.length - 1) && direcao > 0) {
+            tarefas[tarefas.length - 1].selecionado = true;
         } else {
-            itens[itemSelecionar + direcao].selecionado = true;
+            tarefas[tarefaSelecionar + direcao].selecionado = true;
         }
 
-        let proximoSelecionar = itens.findIndex(x => x.selecionado == true);
+        let proximoSelecionar = tarefas.findIndex(x => x.selecionado == true);
 
         let limpaSelecao = document.querySelectorAll(".lista-tarefas ul li");
-        limpaSelecao.forEach(function (item) {
-            item.classList.remove("selecionado");
+        limpaSelecao.forEach(function (tarefa) {
+            tarefa.classList.remove("selecionado");
         });
 
         let listaTarefas = document.querySelector(`.lista-tarefas ul li:nth-child(${proximoSelecionar + 1})`);
         listaTarefas.classList.add("selecionado");
 
-        salvarLista(itens);
+        salvarLista(tarefas);
     }
 
 })();
