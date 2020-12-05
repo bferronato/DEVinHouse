@@ -19,6 +19,10 @@
             navegar(1);
         } else if (event.key == "k" && !(document.activeElement === document.getElementById('tarefa'))) {
             navegar(-1);
+        } else if (event.key == "h" && !(document.activeElement === document.getElementById('tarefa'))) {
+            mover(1);
+        } else if (event.key == "l" && !(document.activeElement === document.getElementById('tarefa'))) {
+            mover(-1);
         } else if (event.key == "Delete" && !(document.activeElement === document.getElementById('tarefa'))) {
             excluirTarefaAtalho();
         } else if (event.key == "x" && !(document.activeElement === document.getElementById('tarefa'))) {
@@ -135,7 +139,6 @@
 
     let salvarLista = function (tarefas, callback) {
 
-        tarefas.sort((a, b) => (a.concluido > b.concluido) ? 1 : ((b.concluido > a.concluido) ? -1 : 0));
         localStorage.setItem("tarefas", JSON.stringify(tarefas));
 
         if (callback) {
@@ -203,17 +206,32 @@
             tarefas[tarefaSelecionar + direcao].selecionado = true;
         }
 
-        let proximoSelecionar = tarefas.findIndex(x => x.selecionado == true);
+        salvarLista(tarefas, carregarLista);
+    }
 
-        let limpaSelecao = document.querySelectorAll(".lista-tarefas ul li");
-        limpaSelecao.forEach(function (tarefa) {
-            tarefa.classList.remove("selecionado");
+    let mover = function (direcao) {
+
+        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        let tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
+
+        tarefas.forEach(function (tarefa, i) {
+            tarefa.selecionado = false;
         });
 
-        let listaTarefas = document.querySelector(`.lista-tarefas ul li:nth-child(${proximoSelecionar + 1})`);
-        listaTarefas.classList.add("selecionado");
+        if (tarefaSelecionar <= 0 && direcao < 0) {
+            tarefas[0].selecionado = true;
+        } else if (tarefaSelecionar == (tarefas.length - 1) && direcao > 0) {
+            tarefas[tarefas.length - 1].selecionado = true;
+        } else {
+            let tarefaSelecionada = tarefas[tarefaSelecionar];
+            let tarefaMover = tarefas[tarefaSelecionar + direcao];
 
-        salvarLista(tarefas);
+            tarefas[tarefaSelecionar + direcao] = tarefaSelecionada;
+            tarefas[tarefaSelecionar + direcao].selecionado = true;
+            tarefas[tarefaSelecionar] = tarefaMover;
+        }
+
+        salvarLista(tarefas, carregarLista);
     }
 
 })();
