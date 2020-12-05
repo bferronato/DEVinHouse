@@ -52,7 +52,10 @@
         if (validarAdicionarTarefa(tarefas, tarefa)) {
 
             document.getElementById("tarefa").value = "";
-            tarefas.push({ "nome": tarefa, "concluido": false, "selecionado": false });
+            tarefas.forEach(function (tarefa, i) {
+                tarefa.selecionado = false;
+            });
+            tarefas.unshift({ "nome": tarefa, "concluido": false, "selecionado": true })
 
             salvarLista(tarefas, carregarLista);
         }
@@ -154,6 +157,10 @@
         let confirmaExclusao = confirm(`Deseja realmente excluir a tarefa "${tarefa}"?`);
         if (confirmaExclusao) {
             tarefas.splice(tarefaExcluir, 1);
+        }
+
+        if (tarefas[0]) {
+            tarefas[0].selecionado = true;
         }
 
         salvarLista(tarefas, carregarLista);
