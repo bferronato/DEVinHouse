@@ -2,6 +2,8 @@
 // a função deve somar os dois valores e somente resolver a promise caso o resultado seja par 
 // retornando o valor da soma e rejeitando a promise caso ímpar, retornando uma mensagem explicativa
 
+// PROMISSE
+
 const add = (a, b) => {
     return new Promise((resolve, reject) => {
 
