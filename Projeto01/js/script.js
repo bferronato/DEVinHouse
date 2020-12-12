@@ -1,6 +1,6 @@
 (function () {
 
-    let adicionar = document.getElementById("adicionar");
+    const adicionar = document.getElementById("adicionar");
 
     window.onload = function () {
         carregarLista();
@@ -41,9 +41,9 @@
         adicionarTarefa();
     });
 
-    let adicionarTarefa = function () {
+    const adicionarTarefa = function () {
         let tarefas = new Array();
-        let tarefa = document.getElementById("tarefa").value.trim();
+        const tarefa = document.getElementById("tarefa").value.trim();
 
         if (localStorage.hasOwnProperty("tarefas")) {
             tarefas = JSON.parse(localStorage.getItem("tarefas"));
@@ -61,7 +61,7 @@
         }
     }
 
-    let validarAdicionarTarefa = function (tarefas, tarefa) {
+    const validarAdicionarTarefa = function (tarefas, tarefa) {
 
         if (tarefa.length === 0) {
             alert("O nome da tarefa não pode ser vazio.");
@@ -76,7 +76,7 @@
         return true;
     }
 
-    let carregarLista = function () {
+    const carregarLista = function () {
         let tarefas = new Array();
 
         if (localStorage.hasOwnProperty("tarefas")) {
@@ -86,17 +86,17 @@
         montarLista(tarefas);
     }
 
-    let montarLista = function (tarefas) {
-        let listaTarefas = document.querySelector(".lista-tarefas");
+    const montarLista = function (tarefas) {
+        const listaTarefas = document.querySelector(".lista-tarefas");
         listaTarefas.innerHTML = "";
-        let ul = document.createElement("ul");
+        const ul = document.createElement("ul");
 
         tarefas.forEach(function (tarefa, i) {
 
-            let id = "tarefa-" + i;
-            let nome = tarefa.nome;
+            const id = "tarefa-" + i;
+            const nome = tarefa.nome;
 
-            let checkbox = document.createElement("input");
+            const checkbox = document.createElement("input");
             checkbox.id = id;
             checkbox.type = "checkbox";
             checkbox.checked = tarefa.concluido;
@@ -104,24 +104,24 @@
                 concluirTarefa(nome);
             });
 
-            let label = document.createElement("label");
+            const label = document.createElement("label");
             label.innerHTML = nome;
             label.setAttribute("for", id);
 
-            let divTarefa = document.createElement("div");
+            const divTarefa = document.createElement("div");
             divTarefa.appendChild(checkbox);
             divTarefa.appendChild(label);
 
-            let iconeExcluir = document.createElement("i");
+            const iconeExcluir = document.createElement("i");
             iconeExcluir.classList.add("fas", "fa-trash-alt");
             iconeExcluir.addEventListener("click", function () {
                 excluirTarefa(nome);
             });
 
-            let divIcone = document.createElement("div");
+            const divIcone = document.createElement("div");
             divIcone.appendChild(iconeExcluir);
 
-            let li = document.createElement("li");
+            const li = document.createElement("li");
             if (tarefa.selecionado) {
                 li.classList.add("selecionado");
             }
@@ -134,13 +134,13 @@
         if (tarefas.length > 0) {
             listaTarefas.appendChild(ul);
         } else {
-            let listaVazia = document.createElement("h4");
+            const listaVazia = document.createElement("h4");
             listaVazia.innerHTML = "Nenhuma tarefa adicionada a sua lista.";
             listaTarefas.appendChild(listaVazia);
         }
     }
 
-    let salvarLista = function (tarefas, callback) {
+    const salvarLista = function (tarefas, callback) {
 
         localStorage.setItem("tarefas", JSON.stringify(tarefas));
 
@@ -149,12 +149,12 @@
         }
     }
 
-    let excluirTarefa = function (tarefa) {
+    const excluirTarefa = function (tarefa) {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaExcluir = tarefas.findIndex(x => x.nome == tarefa);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaExcluir = tarefas.findIndex(x => x.nome == tarefa);
 
-        let confirmaExclusao = confirm(`Deseja realmente excluir a tarefa "${tarefa}"?`);
+        const confirmaExclusao = confirm(`Deseja realmente excluir a tarefa "${tarefa}"?`);
         if (confirmaExclusao) {
             tarefas.splice(tarefaExcluir, 1);
         }
@@ -166,40 +166,40 @@
         salvarLista(tarefas, carregarLista);
     }
 
-    let excluirTarefaAtalho = function () {
+    const excluirTarefaAtalho = function () {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaExcluir = tarefas.find(x => x.selecionado == true);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaExcluir = tarefas.find(x => x.selecionado == true);
 
         if (tarefaExcluir) {
             excluirTarefa(tarefaExcluir.nome);
         }
     }
 
-    let concluirTarefa = function (tarefa) {
+    const concluirTarefa = function (tarefa) {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaConcluir = tarefas.findIndex(x => x.nome == tarefa);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaConcluir = tarefas.findIndex(x => x.nome == tarefa);
 
         tarefas[tarefaConcluir].concluido = !tarefas[tarefaConcluir].concluido;
 
         salvarLista(tarefas, carregarLista);
     }
 
-    let concluirTarefaAtalho = function () {
+    const concluirTarefaAtalho = function () {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaConcluir = tarefas.find(x => x.selecionado == true);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaConcluir = tarefas.find(x => x.selecionado == true);
 
         if (tarefaConcluir) {
             concluirTarefa(tarefaConcluir.nome);
         }
     }
 
-    let navegar = function (direcao) {
+    const navegar = function (direcao) {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
 
         tarefas.forEach(function (tarefa, i) {
             tarefa.selecionado = false;
@@ -216,10 +216,10 @@
         salvarLista(tarefas, carregarLista);
     }
 
-    let mover = function (direcao) {
+    const mover = function (direcao) {
 
-        let tarefas = JSON.parse(localStorage.getItem("tarefas"));
-        let tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
+        const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+        const tarefaSelecionar = tarefas.findIndex(x => x.selecionado == true);
 
         if (tarefaSelecionar < 0) {
             return;
@@ -234,8 +234,8 @@
         } else if (tarefaSelecionar == (tarefas.length - 1) && direcao > 0) {
             tarefas[tarefas.length - 1].selecionado = true;
         } else {
-            let tarefaSelecionada = tarefas[tarefaSelecionar];
-            let tarefaMover = tarefas[tarefaSelecionar + direcao];
+            const tarefaSelecionada = tarefas[tarefaSelecionar];
+            const tarefaMover = tarefas[tarefaSelecionar + direcao];
 
             tarefas[tarefaSelecionar + direcao] = tarefaSelecionada;
             tarefas[tarefaSelecionar + direcao].selecionado = true;
