@@ -1,0 +1,9 @@
+.AlunoList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.AlunoTable {
+  border: 1px solid black;
+}
