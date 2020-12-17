@@ -1,9 +1,8 @@
 .AlunoList {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  border: 1px solid black;
+  margin: 0.5em;
 }
 
-.AlunoTable {
-  border: 1px solid black;
+.AlunoList .AlunoTable {
+  width: 100%;
 }

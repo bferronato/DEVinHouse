@@ -1,9 +1,42 @@
 * {
   padding: 0;
   margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+  margin: 0 0.1em;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  margin: 0.1rem 0.5rem 0.1rem 0;
+}
+
+label {
+  padding: 0.1rem;
+  margin: 0.1rem 0.5rem 0.1rem 0;
+}
+
+button {
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  margin: 0 0.1rem;
+  cursor: pointer;
 }
 
 .app {
@@ -11,9 +44,9 @@
   display: grid;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
-  -ms-grid-rows: calc(10vh - 0.625em) calc(7vh - 0.625em) calc(78vh - 0.625em) calc(5vh - 0.625em);
-      grid-template-rows: calc(10vh - 0.625em) calc(7vh - 0.625em) calc(78vh - 0.625em) calc(5vh - 0.625em);
-      grid-template-areas: "header header" "nav nav" "main main" "footer footer";
+  -ms-grid-rows: calc(10vh - 0.666666em) calc(85vh - 0.666666em) calc(5vh - 0.666666em);
+      grid-template-rows: calc(10vh - 0.666666em) calc(85vh - 0.666666em) calc(5vh - 0.666666em);
+      grid-template-areas: "header header" "main main" "footer footer";
   text-align: justify;
   grid-gap: 0.5em;
   margin: 0 auto;
@@ -41,9 +74,6 @@
 }
 
 .nav {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
   grid-area: nav;
   background-color: blue;
   display: -webkit-box;
@@ -76,7 +106,7 @@
 }
 
 .main {
-  -ms-grid-row: 3;
+  -ms-grid-row: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: main;
@@ -87,14 +117,19 @@
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   border-radius: 0.5em;
+  border: 1px solid red;
+  padding: 0.5em;
 }
 
 .footer {
-  -ms-grid-row: 4;
+  -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: footer;

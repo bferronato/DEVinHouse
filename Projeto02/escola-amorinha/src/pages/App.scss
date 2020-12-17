@@ -1,18 +1,45 @@
 * {
     padding: 0;
     margin: 0;
+    border: 0;
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+a {
+    color: blue;
+    text-decoration: none;
+    margin: 0 0.1em;
+}
+a:hover {
+    text-decoration: underline;
+}
+input {
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    margin: 0.1rem 0.5rem 0.1rem 0;
+}
+label {
+    padding: 0.1rem;
+    margin: 0.1rem 0.5rem 0.1rem 0;
+}
+button {
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    margin: 0 0.1rem;
+    cursor: pointer;
+}
 .app {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: calc(10vh - 0.625em) calc(7vh - 0.625em) calc(78vh - 0.625em) calc(5vh - 0.625em);
+    // grid-template-rows: calc(10vh - 0.625em) calc(7vh - 0.625em) calc(78vh - 0.625em) calc(5vh - 0.625em);
+    grid-template-rows: calc(10vh - 0.666666em) calc(85vh - 0.666666em) calc(5vh - 0.666666em);
     grid-template-areas:
         "header header"
-        "nav nav"
         "main main"
         "footer footer";
     text-align: justify;
@@ -58,9 +85,11 @@
     background-color: yellow;
     display: flex;
     justify-content: space-evenly;
-    // flex: 1 1 0;
-    align-items: center;
+    flex: 1 1 0;
+    align-items: flex-start;
     border-radius: 0.5em;
+    border: 1px solid red;
+    padding: 0.5em;
 }
 .footer {
     grid-area: footer;
