@@ -26,6 +26,10 @@ input {
   margin: 0.1rem 0.5rem 0.1rem 0;
 }
 
+input[type="date"] {
+  height: 23.84px;
+}
+
 label {
   padding: 0.1rem;
   margin: 0.1rem 0.5rem 0.1rem 0;

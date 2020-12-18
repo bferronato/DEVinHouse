@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Telefone from '../../Telefone';
+import Data from '../../Data';
 import './Form.min.css';
 
 class AlunoForm extends React.Component {
@@ -9,7 +10,7 @@ class AlunoForm extends React.Component {
         return (
             <div className="AlunoForm">
                 <input type="text" id="nome" placeholder="Nome" />
-                <input type="text" id="dataNascimento" placeholder="Data de nascimento" />
+                <Data id="dataNascimento" value="" placeholder="Data de nascimento" ></Data>
                 <input type="text" id="nomeResponsavel" placeholder="Nome do responsável" />
                 <Telefone id="telefoneContatoResponsavel" value="" placeholder="Telefone responsável" ></Telefone>
                 <input type="text" id="contatoEmergencia" placeholder="Contato de emergência" />
