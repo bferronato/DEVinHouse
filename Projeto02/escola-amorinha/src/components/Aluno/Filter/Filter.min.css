@@ -8,6 +8,6 @@
   border: 1px solid black;
   border-radius: 0.2rem;
   padding: 0.2rem;
-  width: 80%;
-  margin: 0.3rem;
+  width: calc(100% - 1rem);
+  margin: 0.5rem;
 }
