@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Telefone from '../../Telefone';
 import './Form.min.css';
 
 class AlunoForm extends React.Component {
@@ -9,9 +11,9 @@ class AlunoForm extends React.Component {
                 <input type="text" id="nome" placeholder="Nome" />
                 <input type="text" id="dataNascimento" placeholder="Data de nascimento" />
                 <input type="text" id="nomeResponsavel" placeholder="Nome do responsável" />
-                <input type="text" id="telefoneContatoResponsavel" placeholder="Telefone responsável" />
+                <Telefone id="telefoneContatoResponsavel" value="" placeholder="Telefone responsável" ></Telefone>
                 <input type="text" id="contatoEmergencia" placeholder="Contato de emergência" />
-                <input type="text" id="telefoneEmergencia" placeholder="Telefone emergência" />
+                <Telefone id="telefoneEmergencia" value="" placeholder="Telefone emergência" ></Telefone>
                 <input type="text" id="restricaoAlimentar" placeholder="Possui restrição alimentar" />
                 <input type="text" id="descricaoRestricoesAlimentares" placeholder="Descrição restrição alimentar" />
                 <input type="text" id="autorizacaoFotosVideos" placeholder="Autorização uso imagem" />
