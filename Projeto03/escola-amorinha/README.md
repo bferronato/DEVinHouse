@@ -7,8 +7,33 @@
 ### `npm start`
 
 # Install Material UI
-### `npx create-react-app escola-amorinha`
+### `npm install @material-ui/core`
 
+# Install Material UI ICONS
+### `npm install @material-ui/icons`
+
+# Install Font
+### `npm install fontsource-roboto`
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
