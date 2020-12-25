@@ -24,6 +24,7 @@ function Telefone(props) {
             value={telefone.numero}
             label={telefone.placeholder}
             inputProps={{ maxLength: 14 }}
+            autoComplete={telefone.name}
             onChange={handleChange}
         />
     );

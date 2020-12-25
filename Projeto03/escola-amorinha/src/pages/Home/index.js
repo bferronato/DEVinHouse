@@ -6,31 +6,35 @@ import "./index.css";
 
 function Home() {
   const [alunos, setAlunos] = useState([]);
-  const [aluno, setAluno] = useState({ 
-    id: 0, 
-    nome: "", 
-    sobrenome: "", 
-    dataNascimento: "", 
-    nomeResponsavel: "", 
-    telefoneContatoResponsavel: "", 
-    contatoEmergencia: "",
+  const [aluno, setAluno] = useState({
+    id: 0,
+    nome: "",
+    dataNascimento: "",
+    nomeResponsavel: "",
+    telefoneContatoResponsavel: "",
+    contatoCasoEmergencia: ["Pais", "Tios", "Avós", "Padrinhos"],
+    telefoneEmergencia: "",
     possuiRestricaoAlimentar: "",
-    descricaoRestricoesAlimentares: "",
+    descricaoRestricaoAlimentar: "",
+    autorizacaoUsoImagem: "",
+    listaAutorizados: [],
+    turma: ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"],
+    observacao: "",
   });
 
   return (
     <Box m={2}>
       <Typography
-        variant="h3"
         component="h1"
+        variant="h3"
         gutterBottom
-        color="textSecondary"
+        color="textPrimary"
         align="center"
         className="typography"
       >Escola Amorinha
       </Typography>
-      <Grid container spacing={2} >
-        <Grid item xs={12} sm={6} m={2}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6}>
           <Cadastro
             aluno={aluno}
             setAluno={setAluno}
@@ -39,7 +43,10 @@ function Home() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Listagem alunos={alunos} setAlunos={setAlunos} setAluno={setAluno} />
+          <Listagem
+            alunos={alunos}
+            setAlunos={setAlunos}
+            setAluno={setAluno} />
         </Grid>
       </Grid>
     </Box>

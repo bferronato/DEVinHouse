@@ -1,32 +1,47 @@
 // import React from 'react'
 import { useState } from "react";
-import { Box, Paper, Typography, TextField, Button } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
-
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  Paper,
+  Select,
+  Typography,
+  TextField
+} from "@material-ui/core";
 import Telefone from "../Telefone"
-
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-
-// import DeleteIcon from '@material-ui/icons/Delete'
+import PersonAdd from '@material-ui/icons/PersonAdd';
+import SaveIcon from '@material-ui/icons/Save'
 import "./index.css";
 
 function Cadastro(props) {
 
   const { aluno, setAluno, alunos, setAlunos } = props;
 
-  const [telefone, setTelefone] = useState({ name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência", });
-
+  const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
+    { name: "telefoneContatoResponsavel", numero: "", placeholder: "Telefone responsável", }
+  );
+  const [telefoneEmergencia, setTelefoneEmergencia] = useState(
+    { name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência", }
+  );
   const [autorizacaoUsoImagem, setAutorizacaoUsoImagem] = useState(true);
   const [possuiRestricaoAlimentar, setPossuiRestricaoAlimentar] = useState(false);
   let [turma, setTurma] = useState();
-  let [listaAutorizados, setListaAutorizados] = useState();
+  const [listaAutorizados, setListaAutorizados] = useState();
+
+  const handleContatoEmergencia = (event) => {
+    console.log(event.target.value)
+    // setTurma(event.target.value);
+  };
 
   const handleTurma = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
+    // console.log(event.target.name)
     setTurma(event.target.value);
   };
 
@@ -37,7 +52,18 @@ function Cadastro(props) {
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    setAluno((aluno) => ({ ...aluno, [name]: value }));
+
+    // console.log(turma)
+
+    setAluno((aluno) => ({
+      ...aluno,
+      [name]: value,
+      "telefoneContatoResponsavel": telefoneContatoResponsavel.numero,
+      "telefoneEmergencia": telefoneEmergencia.numero,  
+      // "turma":turma
+    }));
+
+    console.log(aluno)
   };
 
   const handleSubmit = (event) => {
@@ -59,23 +85,30 @@ function Cadastro(props) {
     } else {
 
       setAlunos([...alunos, { ...aluno, id: Math.random().toString(36).substr(2, 9), },]);
+
     }
 
     setAluno({
       id: 0,
       nome: "",
-      sobrenome: "",
       dataNascimento: "",
       nomeResponsavel: "",
       telefoneContatoResponsavel: "",
-      contatoEmergencia: "",
+      contatoCasoEmergencia: ["Pais", "Tios", "Avós", "Padrinhos"],
+      telefoneEmergencia: "",
+      possuiRestricaoAlimentar: "",
+      descricaoRestricaoAlimentar: "",
+      autorizacaoUsoImagem: "",
+      listaAutorizados: [],
+      turma: ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"],
+      observacao: "",
     });
 
   };
 
   return (
     <Box component={Paper} p={2}>
-      <Typography component="h2" variant="h6" color="primary">
+      <Typography component="h1" variant="h6" color="primary" gutterBottom>
         Cadastro
       </Typography>
       <Box component="form" onSubmit={handleSubmit} >
@@ -90,28 +123,22 @@ function Cadastro(props) {
             name="nome"
             autoComplete="nome"
             onChange={handleChange}
+            style={{ width: "69.5%" }}
           />
           <TextField
             required
             variant="outlined"
             size="small"
             margin="dense"
-            label="Sobrenome"
-            name="sobrenome"
-            value={aluno.sobrenome}
-            autoComplete="sobrenome"
-            onChange={handleChange}
-          />
-          <TextField
-            required
-            variant="outlined"
-            size="small"
-            margin="dense"
-            // label="Data de nascimento"
+            label="Data de nascimento"
             name="dataNascimento"
             value={aluno.dataNascimento}
             type="date"
             onChange={handleChange}
+            style={{ width: "29.5%" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             required
@@ -123,36 +150,16 @@ function Cadastro(props) {
             value={aluno.nomeResponsavel}
             autoComplete="nomeResponsavel"
             onChange={handleChange}
+            style={{ width: "69.5%" }}
           />
-          <TextField
-            required
-            variant="outlined"
-            size="small"
-            margin="dense"
-            label="Telefone do responsável"
-            name="telefoneContatoResponsavel"
-            value={aluno.telefoneContatoResponsavel}
-            autoComplete="telefoneContatoResponsavel"
-            onChange={handleChange}
+          <Telefone
+            telefone={telefoneContatoResponsavel}
+            setTelefone={setTelefoneContatoResponsavel}
           />
-          <TextField
-            required
-            variant="outlined"
-            size="small"
-            margin="dense"
-            label="Contato de emergência"
-            name="contatoEmergencia"
-            value={aluno.contatoEmergencia}
-            autoComplete="contatoEmergencia"
-            onChange={handleChange}
-          />
-          <Telefone telefone={telefone} setTelefone={setTelefone} />
           <FormControlLabel
             control={
               <Checkbox
                 checked={possuiRestricaoAlimentar}
-                // icon={<DeleteIcon />}
-                // checkedIcon={<SaveIcon />}
                 onChange={(e) => setPossuiRestricaoAlimentar(e.target.checked)}
                 inputProps={{
                   'aria-label': 'secondary checkbox'
@@ -161,28 +168,45 @@ function Cadastro(props) {
               />}
             label="Possui restrição alimentar"
           />
-
-          <TextField
-            required
-            variant="outlined"
-            size="small"
-            margin="dense"
-            label="Descrição restrição alimentar"
-            name="descricaoRestricoesAlimentares"
-            value={aluno.descricaoRestricoesAlimentares}
-            autoComplete="descricaoRestricoesAlimentares"
-            onChange={handleChange}
+          <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
+            <InputLabel htmlFor="contatoEmergencia">Contato de emergência</InputLabel>
+            <Select
+              native
+              value={listaAutorizados}
+              onChange={handleContatoEmergencia}
+              label="Contato de emergência"
+              inputProps={{
+                name: 'contatoEmergencia',
+                id: 'contatoEmergencia',
+              }}
+            >
+              {aluno.contatoCasoEmergencia.map((contato, index) => (
+                <option key={index}>{contato}</option>
+              ))}
+            </Select>
+          </FormControl>
+          <Telefone
+            telefone={telefoneEmergencia}
+            setTelefone={setTelefoneEmergencia}
           />
-          <FormControlLabel style={{
-              width: "50%"
-            }}
-
+          {possuiRestricaoAlimentar &&
+            <TextField
+              multiline
+              fullWidth
+              rows={2}
+              variant="outlined"
+              margin="dense"
+              value={aluno.descricaoRestricaoAlimentar}
+              label="Descrição das restrições alimentares"
+              name="descricaoRestricaoAlimentar"
+              autoComplete="descricaoRestricaoAlimentar"
+              onChange={handleChange}
+            />
+          }
+          <FormControlLabel style={{ width: "100%" }}
             control={
-              <Checkbox 
-
+              <Checkbox
                 checked={autorizacaoUsoImagem}
-                // icon={<DeleteIcon />}
-                // checkedIcon={<SaveIcon />}
                 onChange={(e) => setAutorizacaoUsoImagem(e.target.checked)}
                 inputProps={{
                   'aria-label': 'secondary checkbox'
@@ -191,11 +215,7 @@ function Cadastro(props) {
               />}
             label="Autorização uso imagem"
           />
-
-          <FormControl variant="outlined" margin="dense"
-            style={{
-              width: "50%"
-            }}>
+          <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
             <InputLabel htmlFor="turma">Lista de autorizadores</InputLabel>
             <Select
               native
@@ -213,43 +233,46 @@ function Cadastro(props) {
               <option value={30}>Maria</option>
             </Select>
           </FormControl>
-
-          <FormControl variant="outlined" margin="dense" style={{
-              width: "50%"
-            }}>
-            <InputLabel htmlFor="turma">Turma</InputLabel>
+          <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
+            <InputLabel htmlFor="formTurma">Turma</InputLabel>
             <Select
               native
-
               value={turma}
               onChange={handleTurma}
               label="Turma"
               inputProps={{
-                name: 'turma',
-                id: 'turma',
+                name: 'formTurma',
+                id: 'formTurma',
               }}
             >
-              <option aria-label="None" value="" />
-              <option value={10}>Ten</option>
-              <option value={20}>Twenty</option>
-              <option value={30}>Thirty</option>
+              {aluno.turma.map((nomeTurma, index) => (
+                <option key={index}>{nomeTurma}</option>
+              ))}
             </Select>
           </FormControl>
-
           <TextField
             id="outlined-multiline-static"
             label="Observações"
+            margin="dense"
             multiline
             fullWidth
             rows={4}
             variant="outlined"
           />
         </Grid>
-
         <Box className="button-wrapper">
-          <Button variant="contained" color="primary" type="submit">
-            Salvar
-          </Button>
+          <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+            <Button
+              startIcon={<PersonAdd />}
+              variant="contained"
+              color="primary"
+              type="button">Novo</Button>
+            <Button
+              startIcon={<SaveIcon />}
+              variant="contained"
+              color="secondary"
+              type="submit">Salvar</Button>
+          </ButtonGroup>
         </Box>
       </Box>
     </Box>
