@@ -1,12 +1,12 @@
-// import React from 'react'
-import { useState } from "react";
+// import { useState } from "react";
+// import { useEffect } from "react";
 import {
   Box,
   Button,
   ButtonGroup,
-  Checkbox,
+  // Checkbox,
   FormControl,
-  FormControlLabel,
+  // FormControlLabel,
   Grid,
   InputLabel,
   Paper,
@@ -14,7 +14,9 @@ import {
   Typography,
   TextField
 } from "@material-ui/core";
-import Telefone from "../Telefone"
+// import Telefone from "../Telefone"
+// import { turmas, contatosEmergencia } from "../../util/constants"
+import { turmas } from "../../util/constants"
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import SaveIcon from '@material-ui/icons/Save'
 import "./index.css";
@@ -23,48 +25,53 @@ function Cadastro(props) {
 
   const { aluno, setAluno, alunos, setAlunos } = props;
 
-  const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
-    { name: "telefoneContatoResponsavel", numero: "", placeholder: "Telefone responsável", }
-  );
-  const [telefoneEmergencia, setTelefoneEmergencia] = useState(
-    { name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência", }
-  );
-  const [autorizacaoUsoImagem, setAutorizacaoUsoImagem] = useState(true);
-  const [possuiRestricaoAlimentar, setPossuiRestricaoAlimentar] = useState(false);
-  let [turma, setTurma] = useState();
-  const [listaAutorizados, setListaAutorizados] = useState();
+  console.log(`Component ALUNO CADASTRO:`)
+  console.log(aluno)
 
-  const handleContatoEmergencia = (event) => {
-    console.log(event.target.value)
-    // setTurma(event.target.value);
-  };
+  // const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
+  //   { name: "telefoneContatoResponsavel", numero: aluno.telefoneContatoResponsavel, placeholder: "Telefone responsável" }
+  // );
+  // const [telefoneEmergencia, setTelefoneEmergencia] = useState(
+  //   { name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência" }
+  // );
+  // const [autorizacaoUsoImagem, setAutorizacaoUsoImagem] = useState(true);
+  // const [possuiRestricaoAlimentar, setPossuiRestricaoAlimentar] = useState(false);
 
-  const handleTurma = (event) => {
-    // console.log(event.target.value)
-    // console.log(event.target.name)
-    setTurma(event.target.value);
-  };
+  // let [contatoEmergencia, setContatoEmergencia] = useState();
+  // let [listaAutorizados, setListaAutorizados] = useState();
 
-  const handleListaAutorizados = (event) => {
-    console.log(event.target.value)
-    setListaAutorizados(event.target.value);
-  };
+  // useEffect(() => {
+  //   setTelefoneContatoResponsavel({ ...telefoneContatoResponsavel, numero: aluno.telefoneContatoResponsavel, })
+  // }, [aluno.telefoneContatoResponsavel]);
+
+  // useEffect(() => {
+  //   setTelefoneEmergencia({ ...telefoneEmergencia, numero: aluno.telefoneEmergencia, })
+  // }, [aluno.telefoneEmergencia]); 
+
+  // const handleContatoEmergencia = (event) => {
+  //   setContatoEmergencia(event.target.value);
+  // };
+
+  // const handleListaAutorizados = (event) => {
+  //   setListaAutorizados(event.target.value);
+  // };
 
   const handleChange = (event) => {
     const { value, name } = event.target;
 
-    // console.log(turma)
+    // console.log(name)
+    // console.log(value)
 
     setAluno((aluno) => ({
       ...aluno,
       [name]: value,
-      "telefoneContatoResponsavel": telefoneContatoResponsavel.numero,
-      "telefoneEmergencia": telefoneEmergencia.numero,  
-      // "turma":turma
+      // "telefoneContatoResponsavel": telefoneContatoResponsavel.numero,
+      // "telefoneEmergencia": telefoneEmergencia.numero,
     }));
 
-    console.log(aluno)
+    // console.log(aluno)
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -73,18 +80,19 @@ function Cadastro(props) {
 
     if (existePessoa) {
 
-      alunos.map(item => {
-
+      const result = alunos.map(item => {
         if (item.id === aluno.id) {
           return aluno;
         } else {
           return item;
         }
-      })
+      });
+
+      setAlunos(result);
 
     } else {
-
-      setAlunos([...alunos, { ...aluno, id: Math.random().toString(36).substr(2, 9), },]);
+      
+      setAlunos([...alunos, { ...aluno, id: Math.random().toString(36).substr(2, 9), }]);
 
     }
 
@@ -93,14 +101,14 @@ function Cadastro(props) {
       nome: "",
       dataNascimento: "",
       nomeResponsavel: "",
-      telefoneContatoResponsavel: "",
-      contatoCasoEmergencia: ["Pais", "Tios", "Avós", "Padrinhos"],
+      // telefoneContatoResponsavel: "",
+      // contatoCasoEmergencia: "",
       telefoneEmergencia: "",
       possuiRestricaoAlimentar: "",
       descricaoRestricaoAlimentar: "",
       autorizacaoUsoImagem: "",
       listaAutorizados: [],
-      turma: ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"],
+      turma: "",
       observacao: "",
     });
 
@@ -152,11 +160,11 @@ function Cadastro(props) {
             onChange={handleChange}
             style={{ width: "69.5%" }}
           />
-          <Telefone
+          {/* <Telefone
             telefone={telefoneContatoResponsavel}
             setTelefone={setTelefoneContatoResponsavel}
-          />
-          <FormControlLabel
+          /> */}
+          {/* <FormControlLabel
             control={
               <Checkbox
                 checked={possuiRestricaoAlimentar}
@@ -167,29 +175,29 @@ function Cadastro(props) {
                 color="primary"
               />}
             label="Possui restrição alimentar"
-          />
-          <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
-            <InputLabel htmlFor="contatoEmergencia">Contato de emergência</InputLabel>
+          /> */}
+          {/* <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
+            <InputLabel htmlFor="contatoCasoEmergencia">Contato de emergência</InputLabel>
             <Select
               native
-              value={listaAutorizados}
-              onChange={handleContatoEmergencia}
+              value={aluno.contatoCasoEmergencia}
+              onChange={handleChange}
               label="Contato de emergência"
               inputProps={{
-                name: 'contatoEmergencia',
-                id: 'contatoEmergencia',
+                name: 'contatoCasoEmergencia',
+                id: 'contatoCasoEmergencia',
               }}
             >
-              {aluno.contatoCasoEmergencia.map((contato, index) => (
+              {contatosEmergencia.map((contato, index) => (
                 <option key={index}>{contato}</option>
               ))}
             </Select>
-          </FormControl>
-          <Telefone
+          </FormControl> */}
+          {/* <Telefone
             telefone={telefoneEmergencia}
             setTelefone={setTelefoneEmergencia}
-          />
-          {possuiRestricaoAlimentar &&
+          /> */}
+          {/* {possuiRestricaoAlimentar &&
             <TextField
               multiline
               fullWidth
@@ -202,8 +210,8 @@ function Cadastro(props) {
               autoComplete="descricaoRestricaoAlimentar"
               onChange={handleChange}
             />
-          }
-          <FormControlLabel style={{ width: "100%" }}
+          } */}
+          {/* <FormControlLabel style={{ width: "100%" }}
             control={
               <Checkbox
                 checked={autorizacaoUsoImagem}
@@ -214,8 +222,8 @@ function Cadastro(props) {
                 color="primary"
               />}
             label="Autorização uso imagem"
-          />
-          <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
+          /> */}
+          {/* <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
             <InputLabel htmlFor="turma">Lista de autorizadores</InputLabel>
             <Select
               native
@@ -232,20 +240,20 @@ function Cadastro(props) {
               <option value={20}>joao</option>
               <option value={30}>Maria</option>
             </Select>
-          </FormControl>
+          </FormControl> */}
           <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
-            <InputLabel htmlFor="formTurma">Turma</InputLabel>
+            <InputLabel htmlFor="turma">Turma</InputLabel>
             <Select
               native
-              value={turma}
-              onChange={handleTurma}
+              value={aluno.turma}
+              onChange={handleChange}
               label="Turma"
               inputProps={{
-                name: 'formTurma',
-                id: 'formTurma',
+                name: 'turma',
+                id: 'turma',
               }}
             >
-              {aluno.turma.map((nomeTurma, index) => (
+              {turmas.map((nomeTurma, index) => (
                 <option key={index}>{nomeTurma}</option>
               ))}
             </Select>

@@ -14,6 +14,9 @@ import { Edit, Delete } from "@material-ui/icons";
 function Listagem(props) {
   const { alunos, setAlunos, setAluno } = props;
 
+  console.log(`Component ALUNOS CADASTRO:`)
+  console.log(alunos)
+
   const handleEdit = (id) => {
     const pessoaClicada = alunos.find(item => item.id === id);
     setAluno(pessoaClicada);

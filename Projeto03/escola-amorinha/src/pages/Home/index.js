@@ -8,19 +8,23 @@ function Home() {
   const [alunos, setAlunos] = useState([]);
   const [aluno, setAluno] = useState({
     id: 0,
-    nome: "",
-    dataNascimento: "",
-    nomeResponsavel: "",
-    telefoneContatoResponsavel: "",
-    contatoCasoEmergencia: ["Pais", "Tios", "Avós", "Padrinhos"],
-    telefoneEmergencia: "",
+    nome: "Bruno",
+    dataNascimento: "1983-04-28",
+    nomeResponsavel: "Luciana",
+    telefoneContatoResponsavel: "4934335655",
+    contatoCasoEmergencia: "",
+    telefoneEmergencia: "48984081585",
     possuiRestricaoAlimentar: "",
     descricaoRestricaoAlimentar: "",
     autorizacaoUsoImagem: "",
     listaAutorizados: [],
-    turma: ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"],
+    turma: "",
     observacao: "",
   });
+
+  //  setAluno = () => {
+  //   console.log("okkk")
+  // }
 
   return (
     <Box m={2}>
@@ -44,9 +48,11 @@ function Home() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Listagem
+            aluno={aluno}
+            setAluno={setAluno} 
             alunos={alunos}
             setAlunos={setAlunos}
-            setAluno={setAluno} />
+            />
         </Grid>
       </Grid>
     </Box>
