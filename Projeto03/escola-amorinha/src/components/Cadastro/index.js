@@ -16,16 +16,17 @@ import {
 } from "@material-ui/core";
 // import Telefone from "../Telefone"
 // import { turmas, contatosEmergencia } from "../../util/constants"
-import { turmas } from "../../util/constants"
+
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import SaveIcon from '@material-ui/icons/Save'
 import "./index.css";
 
 function Cadastro(props) {
 
-  const { aluno, setAluno, alunos, setAlunos } = props;
+  const { aluno, setAluno, alunos, setAlunos, turmas } = props;
 
   console.log(`Component ALUNO CADASTRO:`)
+  console.log(turmas)
   console.log(aluno)
 
   // const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
@@ -72,6 +73,24 @@ function Cadastro(props) {
     // console.log(aluno)
   };
 
+  const handleNovo = () => {
+    setAluno({
+      id: 0,
+      nome: "",
+      dataNascimento: "",
+      nomeResponsavel: "",
+      // telefoneContatoResponsavel: "",
+      // contatoCasoEmergencia: "",
+      telefoneEmergencia: "",
+      possuiRestricaoAlimentar: "",
+      descricaoRestricaoAlimentar: "",
+      autorizacaoUsoImagem: "",
+      listaAutorizados: [],
+      turma: turmas[0],
+      observacao: "",
+    });
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -91,26 +110,28 @@ function Cadastro(props) {
       setAlunos(result);
 
     } else {
-      
+
       setAlunos([...alunos, { ...aluno, id: Math.random().toString(36).substr(2, 9), }]);
 
     }
 
-    setAluno({
-      id: 0,
-      nome: "",
-      dataNascimento: "",
-      nomeResponsavel: "",
-      // telefoneContatoResponsavel: "",
-      // contatoCasoEmergencia: "",
-      telefoneEmergencia: "",
-      possuiRestricaoAlimentar: "",
-      descricaoRestricaoAlimentar: "",
-      autorizacaoUsoImagem: "",
-      listaAutorizados: [],
-      turma: "",
-      observacao: "",
-    });
+    handleNovo();
+
+    // setAluno({
+    //   id: 0,
+    //   nome: "",
+    //   dataNascimento: "",
+    //   nomeResponsavel: "",
+    //   // telefoneContatoResponsavel: "",
+    //   // contatoCasoEmergencia: "",
+    //   telefoneEmergencia: "",
+    //   possuiRestricaoAlimentar: "",
+    //   descricaoRestricaoAlimentar: "",
+    //   autorizacaoUsoImagem: "",
+    //   listaAutorizados: [],
+    //   turma: "",
+    //   observacao: "",
+    // });
 
   };
 
@@ -274,7 +295,8 @@ function Cadastro(props) {
               startIcon={<PersonAdd />}
               variant="contained"
               color="primary"
-              type="button">Novo</Button>
+              type="button"
+              onClick={handleNovo}>Novo</Button>
             <Button
               startIcon={<SaveIcon />}
               variant="contained"

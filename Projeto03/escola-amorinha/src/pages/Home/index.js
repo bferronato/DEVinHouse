@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, Typography, Grid } from "@material-ui/core";
+import { turmas } from "../../util/constants"
 import Cadastro from "../../components/Cadastro";
 import Listagem from "../../components/Listagem";
 import "./index.css";
@@ -18,10 +19,11 @@ function Home() {
     descricaoRestricaoAlimentar: "",
     autorizacaoUsoImagem: "",
     listaAutorizados: [],
-    turma: "",
+    turma: turmas[0],
     observacao: "",
   });
 
+  // console.log(turmas)
   //  setAluno = () => {
   //   console.log("okkk")
   // }
@@ -44,15 +46,16 @@ function Home() {
             setAluno={setAluno}
             alunos={alunos}
             setAlunos={setAlunos}
+            turmas={turmas}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Listagem
             aluno={aluno}
-            setAluno={setAluno} 
+            setAluno={setAluno}
             alunos={alunos}
             setAlunos={setAlunos}
-            />
+          />
         </Grid>
       </Grid>
     </Box>
