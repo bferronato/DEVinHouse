@@ -4,9 +4,9 @@ import {
   Box,
   Button,
   ButtonGroup,
-  // Checkbox,
+  Checkbox,
   FormControl,
-  // FormControlLabel,
+  FormControlLabel,
   Grid,
   InputLabel,
   Paper,
@@ -25,8 +25,6 @@ function Cadastro(props) {
 
   const { aluno, setAluno, alunos, setAlunos, turmas, contatosEmergencia } = props;
 
-  console.log(`Component ALUNO CADASTRO:`)
-  console.log(turmas)
   console.log(aluno)
 
   // const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
@@ -36,7 +34,6 @@ function Cadastro(props) {
   //   { name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência" }
   // );
   // const [autorizacaoUsoImagem, setAutorizacaoUsoImagem] = useState(true);
-  // const [possuiRestricaoAlimentar, setPossuiRestricaoAlimentar] = useState(false);
 
   // let [contatoEmergencia, setContatoEmergencia] = useState();
   // let [listaAutorizados, setListaAutorizados] = useState();
@@ -57,23 +54,30 @@ function Cadastro(props) {
   //   setListaAutorizados(event.target.value);
   // };
 
+
+  const handlePossuiRestricaoAlimentar = (checked) => {
+    setAluno((aluno) => ({
+      ...aluno,
+      "possuiRestricaoAlimentar": checked
+    }));
+  };
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
-    // console.log(name)
-    // console.log(value)
-
     setAluno((aluno) => ({
       ...aluno,
-      [name]: value,
+      [name]: value
       // "telefoneContatoResponsavel": telefoneContatoResponsavel.numero,
       // "telefoneEmergencia": telefoneEmergencia.numero,
     }));
 
-    // console.log(aluno)
   };
 
   const handleNovoCadastro = () => {
+
+    // setPossuiRestricaoAlimentar(false);
+
     setAluno({
       id: 0,
       nome: "",
@@ -82,7 +86,7 @@ function Cadastro(props) {
       // telefoneContatoResponsavel: "",
       contatoCasoEmergencia: contatosEmergencia[0],
       telefoneEmergencia: "",
-      possuiRestricaoAlimentar: "",
+      possuiRestricaoAlimentar: false,
       descricaoRestricaoAlimentar: "",
       autorizacaoUsoImagem: "",
       listaAutorizados: [],
@@ -91,6 +95,12 @@ function Cadastro(props) {
     });
   };
 
+  // const setPossuiRestricaoAlimentar = (event) => {
+  //   // const { value, name } = event.target;
+  //   aluno.possuiRestricaoAlimentar = !event
+  //   console.log(event)
+  //   // console.log(name)
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -169,18 +179,18 @@ function Cadastro(props) {
             telefone={telefoneContatoResponsavel}
             setTelefone={setTelefoneContatoResponsavel}
           /> */}
-          {/* <FormControlLabel
+          <FormControlLabel
             control={
               <Checkbox
-                checked={possuiRestricaoAlimentar}
-                onChange={(e) => setPossuiRestricaoAlimentar(e.target.checked)}
+                checked={aluno.possuiRestricaoAlimentar}
+                onChange={(e) => handlePossuiRestricaoAlimentar(e.target.checked)}
                 inputProps={{
                   'aria-label': 'secondary checkbox'
                 }}
                 color="primary"
               />}
             label="Possui restrição alimentar"
-          /> */}
+          />
           <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
             <InputLabel htmlFor="contatoCasoEmergencia">Contato de emergência</InputLabel>
             <Select

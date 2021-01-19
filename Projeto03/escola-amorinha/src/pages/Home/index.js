@@ -15,7 +15,7 @@ function Home() {
     telefoneContatoResponsavel: "4934335655",
     contatoCasoEmergencia: contatosEmergencia[0],
     telefoneEmergencia: "48984081585",
-    possuiRestricaoAlimentar: "",
+    possuiRestricaoAlimentar: false,
     descricaoRestricaoAlimentar: "",
     autorizacaoUsoImagem: "",
     listaAutorizados: [],
