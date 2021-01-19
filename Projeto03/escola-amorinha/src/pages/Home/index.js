@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Typography, Grid } from "@material-ui/core";
-import { turmas } from "../../util/constants"
+import { turmas, contatosEmergencia } from "../../util/constants"
 import Cadastro from "../../components/Cadastro";
 import Listagem from "../../components/Listagem";
 import "./index.css";
@@ -13,7 +13,7 @@ function Home() {
     dataNascimento: "1983-04-28",
     nomeResponsavel: "Luciana",
     telefoneContatoResponsavel: "4934335655",
-    contatoCasoEmergencia: "",
+    contatoCasoEmergencia: contatosEmergencia[0],
     telefoneEmergencia: "48984081585",
     possuiRestricaoAlimentar: "",
     descricaoRestricaoAlimentar: "",
@@ -22,11 +22,6 @@ function Home() {
     turma: turmas[0],
     observacao: "",
   });
-
-  // console.log(turmas)
-  //  setAluno = () => {
-  //   console.log("okkk")
-  // }
 
   return (
     <Box m={2}>
@@ -47,6 +42,7 @@ function Home() {
             alunos={alunos}
             setAlunos={setAlunos}
             turmas={turmas}
+            contatosEmergencia={contatosEmergencia}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

@@ -15,7 +15,7 @@ import {
   TextField
 } from "@material-ui/core";
 // import Telefone from "../Telefone"
-// import { turmas, contatosEmergencia } from "../../util/constants"
+
 
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import SaveIcon from '@material-ui/icons/Save'
@@ -23,7 +23,7 @@ import "./index.css";
 
 function Cadastro(props) {
 
-  const { aluno, setAluno, alunos, setAlunos, turmas } = props;
+  const { aluno, setAluno, alunos, setAlunos, turmas, contatosEmergencia } = props;
 
   console.log(`Component ALUNO CADASTRO:`)
   console.log(turmas)
@@ -73,14 +73,14 @@ function Cadastro(props) {
     // console.log(aluno)
   };
 
-  const handleNovo = () => {
+  const handleNovoCadastro = () => {
     setAluno({
       id: 0,
       nome: "",
       dataNascimento: "",
       nomeResponsavel: "",
       // telefoneContatoResponsavel: "",
-      // contatoCasoEmergencia: "",
+      contatoCasoEmergencia: contatosEmergencia[0],
       telefoneEmergencia: "",
       possuiRestricaoAlimentar: "",
       descricaoRestricaoAlimentar: "",
@@ -115,23 +115,7 @@ function Cadastro(props) {
 
     }
 
-    handleNovo();
-
-    // setAluno({
-    //   id: 0,
-    //   nome: "",
-    //   dataNascimento: "",
-    //   nomeResponsavel: "",
-    //   // telefoneContatoResponsavel: "",
-    //   // contatoCasoEmergencia: "",
-    //   telefoneEmergencia: "",
-    //   possuiRestricaoAlimentar: "",
-    //   descricaoRestricaoAlimentar: "",
-    //   autorizacaoUsoImagem: "",
-    //   listaAutorizados: [],
-    //   turma: "",
-    //   observacao: "",
-    // });
+    handleNovoCadastro();
 
   };
 
@@ -197,7 +181,7 @@ function Cadastro(props) {
               />}
             label="Possui restrição alimentar"
           /> */}
-          {/* <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
+          <FormControl variant="outlined" margin="dense" style={{ width: "33%" }}>
             <InputLabel htmlFor="contatoCasoEmergencia">Contato de emergência</InputLabel>
             <Select
               native
@@ -213,7 +197,7 @@ function Cadastro(props) {
                 <option key={index}>{contato}</option>
               ))}
             </Select>
-          </FormControl> */}
+          </FormControl>
           {/* <Telefone
             telefone={telefoneEmergencia}
             setTelefone={setTelefoneEmergencia}
@@ -296,7 +280,7 @@ function Cadastro(props) {
               variant="contained"
               color="primary"
               type="button"
-              onClick={handleNovo}>Novo</Button>
+              onClick={handleNovoCadastro}>Novo</Button>
             <Button
               startIcon={<SaveIcon />}
               variant="contained"

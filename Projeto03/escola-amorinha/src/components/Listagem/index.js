@@ -46,12 +46,12 @@ function Listagem(props) {
         <TableBody>
           {alunos.map((linha) => (
             <TableRow key={linha.id}>
-              <TableCell align="center">{linha.nome}</TableCell>
+              <TableCell align="left">{linha.nome}</TableCell>
               <TableCell align="center">{linha.dataNascimento}</TableCell>
               <TableCell align="center">{linha.turma}</TableCell>
               <TableCell align="center">{linha.telefoneEmergencia}</TableCell>
               <TableCell align="center">{linha.contatoCasoEmergencia}</TableCell>
-              <TableCell align="center">
+              <TableCell>
                 <Button
                   variant="contained"
                   color="primary"
@@ -71,9 +71,13 @@ function Listagem(props) {
                 </Button>
               </TableCell>
             </TableRow>
+
           ))}
         </TableBody>
       </Table>
+      <>
+        {JSON.stringify(alunos)}
+      </>
     </Box>
   );
 }
