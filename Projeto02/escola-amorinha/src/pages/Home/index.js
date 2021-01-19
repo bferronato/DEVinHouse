@@ -16,11 +16,11 @@ function Home() {
     contatoCasoEmergencia: contatosEmergencia[0],
     telefoneEmergencia: "48984081585",
     possuiRestricaoAlimentar: false,
-    descricaoRestricaoAlimentar: "",
+    descricaoRestricaoAlimentar: "Restrição com glutém e amendoim",
     autorizacaoUsoImagem: "",
     listaAutorizados: [],
     turma: turmas[0],
-    observacao: "",
+    observacao: "Sem observações",
   });
 
   return (

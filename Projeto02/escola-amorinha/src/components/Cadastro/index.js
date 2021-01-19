@@ -75,9 +75,6 @@ function Cadastro(props) {
   };
 
   const handleNovoCadastro = () => {
-
-    // setPossuiRestricaoAlimentar(false);
-
     setAluno({
       id: 0,
       nome: "",
@@ -212,7 +209,7 @@ function Cadastro(props) {
             telefone={telefoneEmergencia}
             setTelefone={setTelefoneEmergencia}
           /> */}
-          {/* {possuiRestricaoAlimentar &&
+          {aluno.possuiRestricaoAlimentar &&
             <TextField
               multiline
               fullWidth
@@ -225,7 +222,7 @@ function Cadastro(props) {
               autoComplete="descricaoRestricaoAlimentar"
               onChange={handleChange}
             />
-          } */}
+          }
           {/* <FormControlLabel style={{ width: "100%" }}
             control={
               <Checkbox
