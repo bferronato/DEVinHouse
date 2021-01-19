@@ -274,9 +274,11 @@ function Cadastro(props) {
             </Select>
           </FormControl>
           <TextField
-            id="outlined-multiline-static"
-            label="Observações"
+            name='observacao'
+            label="Observação"
             margin="dense"
+            value={aluno.observacao}
+            onChange={handleChange}
             multiline
             fullWidth
             rows={4}
