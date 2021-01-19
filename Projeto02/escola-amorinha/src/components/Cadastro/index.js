@@ -1,5 +1,5 @@
-// import { useState } from "react";
-// import { useEffect } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import {
   Box,
   Button,
@@ -14,9 +14,7 @@ import {
   Typography,
   TextField
 } from "@material-ui/core";
-// import Telefone from "../Telefone"
-
-
+import Telefone from "../Telefone"
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save"
 import "./index.css";
@@ -27,9 +25,11 @@ function Cadastro(props) {
 
   console.log(aluno)
 
-  // const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
-  //   { name: "telefoneContatoResponsavel", numero: aluno.telefoneContatoResponsavel, placeholder: "Telefone responsável" }
-  // );
+  const [telefoneContatoResponsavel, setTelefoneContatoResponsavel] = useState(
+    { name: "telefoneContatoResponsavel", numero: aluno.telefoneContatoResponsavel, placeholder: "Telefone responsável" }
+  );
+
+
   // const [telefoneEmergencia, setTelefoneEmergencia] = useState(
   //   { name: "telefoneEmergencia", numero: "", placeholder: "Telefone emergência" }
   // );
@@ -39,8 +39,8 @@ function Cadastro(props) {
   // let [listaAutorizados, setListaAutorizados] = useState();
 
   // useEffect(() => {
-  //   setTelefoneContatoResponsavel({ ...telefoneContatoResponsavel, numero: aluno.telefoneContatoResponsavel, })
-  // }, [aluno.telefoneContatoResponsavel]);
+  //   setTelefoneContatoResponsavel({ ...telefoneContatoResponsavel, numero: '99999999' })
+  // }, [telefoneContatoResponsavel]);
 
   // useEffect(() => {
   //   setTelefoneEmergencia({ ...telefoneEmergencia, numero: aluno.telefoneEmergencia, })
@@ -179,10 +179,10 @@ function Cadastro(props) {
             onChange={handleChange}
             style={{ width: "69.5%" }}
           />
-          {/* <Telefone
+          <Telefone
             telefone={telefoneContatoResponsavel}
             setTelefone={setTelefoneContatoResponsavel}
-          /> */}
+          />
           <FormControlLabel
             control={
               <Checkbox
