@@ -17,7 +17,7 @@ function Home() {
     telefoneEmergencia: "48984081585",
     possuiRestricaoAlimentar: false,
     descricaoRestricaoAlimentar: "Restrição com glutém e amendoim",
-    autorizacaoUsoImagem: "",
+    autorizacaoUsoImagem: true,
     listaAutorizados: [],
     turma: turmas[0],
     observacao: "Sem observações",

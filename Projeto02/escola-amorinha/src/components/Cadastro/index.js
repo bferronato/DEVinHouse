@@ -17,8 +17,8 @@ import {
 // import Telefone from "../Telefone"
 
 
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import SaveIcon from '@material-ui/icons/Save'
+import PersonAdd from "@material-ui/icons/PersonAdd";
+import SaveIcon from "@material-ui/icons/Save"
 import "./index.css";
 
 function Cadastro(props) {
@@ -62,6 +62,13 @@ function Cadastro(props) {
     }));
   };
 
+  const handleAutorizacaoUsoImagem = (checked) => {
+    setAluno((aluno) => ({
+      ...aluno,
+      "autorizacaoUsoImagem": checked
+    }));
+  };
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -85,7 +92,7 @@ function Cadastro(props) {
       telefoneEmergencia: "",
       possuiRestricaoAlimentar: false,
       descricaoRestricaoAlimentar: "",
-      autorizacaoUsoImagem: "",
+      autorizacaoUsoImagem: true,
       listaAutorizados: [],
       turma: turmas[0],
       observacao: "",
@@ -182,7 +189,7 @@ function Cadastro(props) {
                 checked={aluno.possuiRestricaoAlimentar}
                 onChange={(e) => handlePossuiRestricaoAlimentar(e.target.checked)}
                 inputProps={{
-                  'aria-label': 'secondary checkbox'
+                  "aria-label": "secondary checkbox"
                 }}
                 color="primary"
               />}
@@ -196,8 +203,8 @@ function Cadastro(props) {
               onChange={handleChange}
               label="Contato de emergência"
               inputProps={{
-                name: 'contatoCasoEmergencia',
-                id: 'contatoCasoEmergencia',
+                name: "contatoCasoEmergencia",
+                id: "contatoCasoEmergencia",
               }}
             >
               {contatosEmergencia.map((contato, index) => (
@@ -223,18 +230,18 @@ function Cadastro(props) {
               onChange={handleChange}
             />
           }
-          {/* <FormControlLabel style={{ width: "100%" }}
+          <FormControlLabel style={{ width: "100%" }}
             control={
               <Checkbox
-                checked={autorizacaoUsoImagem}
-                onChange={(e) => setAutorizacaoUsoImagem(e.target.checked)}
+                checked={aluno.autorizacaoUsoImagem}
+                onChange={(e) => handleAutorizacaoUsoImagem(e.target.checked)}
                 inputProps={{
-                  'aria-label': 'secondary checkbox'
+                  "aria-label": "secondary checkbox"
                 }}
                 color="primary"
               />}
             label="Autorização uso imagem"
-          /> */}
+          />
           {/* <FormControl variant="outlined" margin="dense" style={{ width: "49.5%" }}>
             <InputLabel htmlFor="turma">Lista de autorizadores</InputLabel>
             <Select
@@ -243,8 +250,8 @@ function Cadastro(props) {
               onChange={handleListaAutorizados}
               label="Lista de autorizadores"
               inputProps={{
-                name: 'listaAutorizados',
-                id: 'listaAutorizados',
+                name: "listaAutorizados",
+                id: "listaAutorizados",
               }}
             >
               <option aria-label="None" value="" />
@@ -261,8 +268,8 @@ function Cadastro(props) {
               onChange={handleChange}
               label="Turma"
               inputProps={{
-                name: 'turma',
-                id: 'turma',
+                name: "turma",
+                id: "turma",
               }}
             >
               {turmas.map((nomeTurma, index) => (
@@ -271,7 +278,7 @@ function Cadastro(props) {
             </Select>
           </FormControl>
           <TextField
-            name='observacao'
+            name="observacao"
             label="Observação"
             margin="dense"
             value={aluno.observacao}
