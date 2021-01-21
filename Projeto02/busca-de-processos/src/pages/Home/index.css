@@ -20,4 +20,5 @@
   text-decoration: underline !important;
   font-weight: bold !important;
   color: #005b95 !important;
+  cursor: pointer;
 }

@@ -4,7 +4,7 @@
 
 import App from '../App';
 import Telefone from '../components/Telefone';
-import H1 from '../components/H1';
+import Listar from '../components/Processo/Listar';
 
 const routes = [
     {
@@ -13,8 +13,8 @@ const routes = [
         exact: true
     },
     {
-        path: '/h1', // path: '/processo/cadastro/:id?',
-        component: H1
+        path: '/listar', // path: '/processo/cadastro/:id?',
+        component: Listar
     }
    ,
     {

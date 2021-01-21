@@ -1,32 +1,58 @@
 import { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 import { Box, Typography, Grid, TextField } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import { turmas, contatosEmergencia } from "../../util/constants"
-import Cadastro from "../../components/Cadastro";
-import Listagem from "../../components/Listagem";
 import "./index.css";
 
 function Home() {
-  const [alunos, setAlunos] = useState([]);
-  const [aluno, setAluno] = useState({
-    id: 0,
-    nome: "Bruno",
-    dataNascimento: "1983-04-28",
-    nomeResponsavel: "Luciana",
-    telefoneContatoResponsavel: "4934335655",
-    contatoCasoEmergencia: contatosEmergencia[0],
-    telefoneEmergencia: "48984081585",
-    possuiRestricaoAlimentar: false,
-    descricaoRestricaoAlimentar: "Restrição com glutém e amendoim",
-    autorizacaoUsoImagem: true,
-    listaAutorizados: [],
-    turma: turmas[0],
-    observacao: "Sem observações",
+
+  const [open, setOpen] = useState(true);
+  const [processo, setProcesso] = useState({
+    descricao: "Teste",
+    assunto: "testes",
+    interessados: ["Bruno", "Maria"]
   });
+  const [novoInteressado, setNovoInteressado] = useState("");
+
+  const adicionarNovoInteressado = () => {
+    setProcesso((processo) => ({
+      ...processo,
+      "interessados": [...processo.interessados, novoInteressado]
+    }));
+  };
+  
+
+  const handleChangeProcesso = (event) => {
+    const { value, name } = event.target;
+    setProcesso((processo) => ({
+      ...processo,
+      [name]: value
+    }));
+  };
+
+  const handlePesquisa = (event) => {
+    alert("okk")
+  };
+
+  const handleSalvarProjeto = () => {
+    alert("Salvar Projeto")
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box m={1} justifyContent="center" style={{
@@ -60,7 +86,7 @@ function Home() {
           InputProps={{
             endAdornment: (
               <InputAdornment>
-                <IconButton>
+                <IconButton onClick={handlePesquisa}>
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
@@ -76,31 +102,85 @@ function Home() {
           gutterBottom
           align="center"
           className="label"
-        >Você pode criar um novo processo <Link to="/h1" className="link"> clicando aqui </Link>
+        >Você pode criar um novo processo <Link onClick={handleClickOpen} className="link"> clicando aqui </Link>
         </Typography>
       </Box>
 
-
-      {/* <Grid container spacing={1}>
-        <Grid item xs={12} sm={6}>
-          <Cadastro
-            aluno={aluno}
-            setAluno={setAluno}
-            alunos={alunos}
-            setAlunos={setAlunos}
-            turmas={turmas}
-            contatosEmergencia={contatosEmergencia}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Listagem
-            aluno={aluno}
-            setAluno={setAluno}
-            alunos={alunos}
-            setAlunos={setAlunos}
-          />
-        </Grid>
-      </Grid> */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        maxWidth="sm"
+        aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Cadastro de processo</DialogTitle>
+        <DialogContent>
+          <Grid container direction="row" justify="flex-start" alignItems="flex-end">
+            <Grid item xs={6}>
+              <TextField
+                type="text"
+                name="assunto"
+                value={processo.assunto}
+                onChange={handleChangeProcesso}
+                label="Assunto"
+                margin="dense"
+                size="small"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6} />
+            <Grid item xs={6}>
+              <TextField
+                style={{ textAlign: 'left' }}
+                label="Interessados"
+                multiline
+                rows={processo.interessados.length || 1}
+                fullWidth
+                value={processo.interessados.map((val, idx) => { return val; }).join('\n')}
+              />
+            </Grid>
+            <Grid item xs={6} />
+            <Grid item xs={6}>
+              <TextField
+                type="text"
+                name="novoInteressado"
+                value={novoInteressado}
+                onChange={(e) => setNovoInteressado(e.target.value)}
+                variant="standard"
+                margin="dense"
+                size="small"
+                label="Novo interessado"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={adicionarNovoInteressado}
+                style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
+                type="button">Adicionar</Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="descricao"
+                value={processo.descricao}
+                onChange={handleChangeProcesso}
+                label="Descrição"
+                margin="dense"
+                multiline
+                rows={4}
+                variant="standard"
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSalvarProjeto} variant="contained" color="primary">
+            Salvar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
