@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProcessoService from "../../services";
+import { BrowserRouter as Router, Redirect, Route, Switch, Link } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -10,7 +12,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Link,
+  Link as LinkMaterialUi,
   List,
   ListItem,
   ListItemText,
@@ -30,7 +32,11 @@ const PROCESSO_INICIAL = {
 
 function Home() {
 
-  const [open, setOpen] = useState(true);
+  const history = useHistory();
+
+  const [open, setOpen] = useState(false);
+
+  const [pesquisa, setPesquisa] = useState(" ");
 
   const [novoInteressado, setNovoInteressado] = useState("");
 
@@ -67,7 +73,25 @@ function Home() {
   };
 
   const handlePesquisa = (event) => {
-    alert("okk")
+
+    // <Redirect to={`/listar`}/>
+
+    // <Link to={{
+    //   pathname: "/listar",
+    //   state: pesquisa
+    // }}>
+    //   Register
+    //  </Link>
+
+    history.push({
+      pathname:"/listar",
+      state:{
+          key:"Obaaaa"
+       }
+     });
+
+
+    alert("Pesquisar")
   };
 
   const handleCadastrarProcesso = () => {
@@ -105,6 +129,9 @@ function Home() {
 
       <Box mx="auto" width={2 / 6} >
         <TextField
+          name="pesquisa"
+          value={pesquisa}
+          onChange={(e) => setPesquisa(e.target.value)}
           label="Pesquise por uma informação do processo"
           variant="outlined"
           size="small"
@@ -133,7 +160,7 @@ function Home() {
           gutterBottom
           align="center"
           className="label"
-        >Você pode criar um novo processo <Link onClick={abrirFormProcesso} className="link"> clicando aqui </Link>
+        >Você pode criar um novo processo <LinkMaterialUi onClick={abrirFormProcesso} className="link"> clicando aqui </LinkMaterialUi>
         </Typography>
       </Box>
 
