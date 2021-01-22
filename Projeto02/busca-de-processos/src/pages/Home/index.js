@@ -1,36 +1,64 @@
 import { useState } from "react";
-
-import Link from '@material-ui/core/Link';
-import { Box, Typography, Grid, TextField } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import ProcessoService from "../../services";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Link,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  TextField,
+  Typography
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
+
+const PROCESSO_INICIAL = {
+  descricao: "",
+  assunto: "",
+  interessados: []
+}
 
 function Home() {
 
   const [open, setOpen] = useState(true);
+
+  const [novoInteressado, setNovoInteressado] = useState("");
+
   const [processo, setProcesso] = useState({
     descricao: "Teste",
     assunto: "testes",
-    interessados: ["Bruno", "Maria"]
+    interessados: ["Bruno", "Maria", "Joana", "Carla"]
   });
-  const [novoInteressado, setNovoInteressado] = useState("");
 
-  const adicionarNovoInteressado = () => {
+  const handleAdicionarNovoInteressado = () => {
+    if (novoInteressado.length > 0) {
+      setProcesso((processo) => ({
+        ...processo,
+        "interessados": [...processo.interessados, novoInteressado]
+      }));
+      setNovoInteressado("")
+    }
+  };
+
+  const handleRemoverInteressado = (indice) => {
+    processo.interessados.splice(indice, 1);
     setProcesso((processo) => ({
       ...processo,
-      "interessados": [...processo.interessados, novoInteressado]
+      "interessados": [...processo.interessados]
     }));
   };
-  
 
-  const handleChangeProcesso = (event) => {
+  const handleProcesso = (event) => {
     const { value, name } = event.target;
     setProcesso((processo) => ({
       ...processo,
@@ -42,15 +70,18 @@ function Home() {
     alert("okk")
   };
 
-  const handleSalvarProjeto = () => {
-    alert("Salvar Projeto")
+  const handleCadastrarProcesso = () => {
+    ProcessoService.cadastrarProcesso(processo);
+    alert("Processo cadastrado com sucesso.")
+    setProcesso(PROCESSO_INICIAL);
+    fecharFormProcesso();
   }
 
-  const handleClickOpen = () => {
+  const abrirFormProcesso = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const fecharFormProcesso = () => {
     setOpen(false);
   };
 
@@ -102,17 +133,19 @@ function Home() {
           gutterBottom
           align="center"
           className="label"
-        >Você pode criar um novo processo <Link onClick={handleClickOpen} className="link"> clicando aqui </Link>
+        >Você pode criar um novo processo <Link onClick={abrirFormProcesso} className="link"> clicando aqui </Link>
         </Typography>
       </Box>
 
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={fecharFormProcesso}
         fullWidth
         maxWidth="sm"
         aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Cadastro de processo</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Cadastro de processo
+        </DialogTitle>
         <DialogContent>
           <Grid container direction="row" justify="flex-start" alignItems="flex-end">
             <Grid item xs={6}>
@@ -120,7 +153,7 @@ function Home() {
                 type="text"
                 name="assunto"
                 value={processo.assunto}
-                onChange={handleChangeProcesso}
+                onChange={handleProcesso}
                 label="Assunto"
                 margin="dense"
                 size="small"
@@ -129,14 +162,21 @@ function Home() {
             </Grid>
             <Grid item xs={6} />
             <Grid item xs={6}>
-              <TextField
-                style={{ textAlign: 'left' }}
-                label="Interessados"
-                multiline
-                rows={processo.interessados.length || 1}
-                fullWidth
-                value={processo.interessados.map((val, idx) => { return val; }).join('\n')}
-              />
+              <Typography variant="h6" className="MuiFormLabel-root MuiInputLabel-shrink" >
+                Interessados
+              </Typography>
+              {processo.interessados.length > 0 && <List dense style={{ padding: '0.5rem 0 0' }} >
+                {processo.interessados.map((linha, i) => (
+                  <ListItem key={i} alignItems="flex-start" style={{ padding: '0.1rem' }} >
+                    <ListItemText secondary={linha} style={{ padding: '0.1rem', margin: '0' }} />
+                    <ListItemSecondaryAction >
+                      <IconButton onClick={() => handleRemoverInteressado(i)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>}
             </Grid>
             <Grid item xs={6} />
             <Grid item xs={6}>
@@ -156,7 +196,7 @@ function Home() {
               <Button
                 variant="contained"
                 size="small"
-                onClick={adicionarNovoInteressado}
+                onClick={handleAdicionarNovoInteressado}
                 style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
                 type="button">Adicionar</Button>
             </Grid>
@@ -164,7 +204,7 @@ function Home() {
               <TextField
                 name="descricao"
                 value={processo.descricao}
-                onChange={handleChangeProcesso}
+                onChange={handleProcesso}
                 label="Descrição"
                 margin="dense"
                 multiline
@@ -176,7 +216,7 @@ function Home() {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSalvarProjeto} variant="contained" color="primary">
+          <Button onClick={handleCadastrarProcesso} variant="contained" color="primary">
             Salvar
           </Button>
         </DialogActions>
