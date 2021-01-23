@@ -11,6 +11,18 @@ const ProcessoService = {
         } catch (error) {
             throw error;
         }
+    },
+
+    buscarProcessos(q = "") {
+        try {
+            return axios.get(`${BASE_URL}?q=${q}`)
+                .then(response => response.data)
+                .catch(error => {
+                    throw error
+                });
+        } catch (error) {
+            throw error;
+        }
     }
 
     // buscarFilmes() {
@@ -21,13 +33,7 @@ const ProcessoService = {
     //         });
     // },
 
-    // buscarFilme(id) {
-    //     return axios.get(`${BASE_URL}/${id}`)
-    //         .then(response => response.data)
-    //         .catch(error => {
-    //             throw error
-    //         });
-    // },
+
 
     // inserirFilme(filme) {
     //     return axios.post(BASE_URL, filme)

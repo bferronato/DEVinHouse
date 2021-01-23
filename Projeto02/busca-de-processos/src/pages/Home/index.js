@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProcessoService from "../../services";
-import { BrowserRouter as Router, Redirect, Route, Switch, Link } from 'react-router-dom';
-import {  useHistory } from 'react-router-dom';
+// import { BrowserRouter as Router, Redirect, Route, Switch, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -36,7 +36,7 @@ function Home() {
 
   const [open, setOpen] = useState(false);
 
-  const [pesquisa, setPesquisa] = useState(" ");
+  const [pesquisa, setPesquisa] = useState("SOFT 2021/00001");
 
   const [novoInteressado, setNovoInteressado] = useState("");
 
@@ -74,31 +74,27 @@ function Home() {
 
   const handlePesquisa = (event) => {
 
-    // <Redirect to={`/listar`}/>
-
-    // <Link to={{
-    //   pathname: "/listar",
-    //   state: pesquisa
-    // }}>
-    //   Register
-    //  </Link>
-
     history.push({
-      pathname:"/listar",
-      state:{
-          key:"Obaaaa"
-       }
-     });
+      pathname: "/listar",
+      state: {
+        pesquisa: pesquisa
+      }
+    });
 
-
-    alert("Pesquisar")
   };
 
   const handleCadastrarProcesso = () => {
-    ProcessoService.cadastrarProcesso(processo);
-    alert("Processo cadastrado com sucesso.")
-    setProcesso(PROCESSO_INICIAL);
-    fecharFormProcesso();
+
+    ProcessoService.cadastrarProcesso(processo).then(processo => {
+      if (processo.status === 201) {
+        alert("Processo cadastrado com sucesso.")
+        setProcesso(PROCESSO_INICIAL);
+        fecharFormProcesso();
+      } else {
+        alert("Erro ao cadastrar o processo.")
+      }
+    }).catch(error => alert(error));
+
   }
 
   const abrirFormProcesso = () => {
