@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import ProcessoService from "../../services";
 import {
     Avatar,
-    Box, Button, Card, CardContent, Grid, IconButton, InputAdornment,
+    Box, Button, Card, CardActions, CardHeader, CardContent, Grid, IconButton, InputAdornment,
     Paper, TextField, Typography,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from '@material-ui/icons/CloseRounded';
 import "../../pages/Home/index.css";
 
 function Listar(props) {
@@ -14,10 +15,10 @@ function Listar(props) {
 
     const [processos, setProcessos] = useState([]);
     const [processoSelecionado, setProcessoSelecionado] = useState({});
-    const [detalhe, setDetalhe] = useState(true);
+    const [detalhe, setDetalhe] = useState(false);
 
     const handleSetProcesso = (processo) => {
-        setDetalhe(detalhe);
+        setDetalhe(true);
         setProcessoSelecionado(processo)
     }
 
@@ -96,7 +97,7 @@ function Listar(props) {
 
 
 
-                                    
+
                                     <Card variant="outlined"
                                         style={{ border: "1px solid #005b95", cursor: "pointer" }}
                                         onClick={(e) => handleSetProcesso(processo)}>
@@ -163,20 +164,23 @@ function Listar(props) {
 
                     {detalhe &&
                         <Grid item xs={7} >
-                            <Box mb={2} elevation={1}>
-                                <Grid container spacing={2} alignItems="center" style={{ padding: "0.8rem", border: "0px solid red" }}>
 
-                                    <Grid item xs={2}>
-                                        <Grid item xs={12}>
-                                            <Avatar variant="square"
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkWFnt8-03BhQJzLon1y0PV3ZqcfHWysoJg&usqp=CAU"
-                                                style={{ height: 'auto', width: 'auto', textAlign: "center", alignSelf: 'center' }}
-                                            />
-                                        </Grid>
-                                    </Grid>
-
-                                    <Grid item xs={10}>
-                                        <Grid container spacing={2}>
+                            <Card >
+                                <CardHeader
+                                    avatar={
+                                        <Avatar variant="square"
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkWFnt8-03BhQJzLon1y0PV3ZqcfHWysoJg&usqp=CAU"
+                                            style={{ width: '100px', height: '100px', textAlign: "center", alignSelf: 'center' }}
+                                        />
+                                    }
+                                    action={
+                                        <IconButton aria-label="settings">
+                                            <CloseIcon 
+                                            onClick={(e) => setDetalhe(false)}></CloseIcon>
+                                        </IconButton>
+                                    }
+                                    title={
+                                        <Grid container spacing={1}>
                                             <Grid item xs={6}>
                                                 <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
                                                     Processo
@@ -202,16 +206,18 @@ function Listar(props) {
                                                 </Typography>
                                             </Grid>
                                         </Grid>
-                                    </Grid>
+                                    }
+                                />
+                                <CardContent>
 
-                                    <Grid container spacing={1} style={{ padding: "0.5rem" }}>
+                                    <Grid container spacing={1} style={{ padding: "0.5rem", paddingTop: "0" }}>
                                         <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
                                             Interresados
                                         </Typography>
 
-                                        <Grid container >
+                                        <Grid item container >
                                             {processoSelecionado.interessados && processoSelecionado.interessados.map((interessado, i) => (
-                                                <Grid item xs={6}>
+                                                <Grid item xs={6} key={i}>
                                                     <Typography variant="body2" >
                                                         {interessado}
                                                     </Typography>
@@ -220,17 +226,43 @@ function Listar(props) {
                                         </Grid>
                                     </Grid>
 
-                                    <Grid container xs={12} spacing={1} style={{ padding: "0.5rem" }}>
+                                    <Grid container spacing={1} style={{ padding: "0.5rem" }}>
                                         <Typography color="textSecondary" display="block" style={{ fontWeight: "bold" }}>
                                             Descrição
                                         </Typography>
-                                        <Typography variant="body2" component="p">
-                                            {processoSelecionado.descricao}
-                                        </Typography>
+                                        <Grid container >
+                                            <Typography variant="body2" component="p">
+                                                {processoSelecionado.descricao}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
 
-                                </Grid>
-                            </Box>
+                                </CardContent>
+
+                                <CardActions style={{ justifyContent: 'flex-end' }} >
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        // onClick={handleAdicionarNovoInteressado}
+                                        // style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
+                                        type="button">Remover
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        // onClick={handleAdicionarNovoInteressado}
+                                        // style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
+                                        style={{ margin: '16px' }}
+                                        type="button">Editar
+                                    </Button>
+
+
+                                </CardActions>
+
+                            </Card>
+
+
+
                         </Grid>
                     }
 
