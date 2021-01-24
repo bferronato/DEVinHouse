@@ -3,7 +3,7 @@ import ProcessoService from "../../services";
 import {
     Avatar,
     Box, Button, Card, CardContent, Grid, IconButton, InputAdornment,
-    Paper, TextField, Typography
+    Paper, TextField, Typography,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import "../../pages/Home/index.css";
@@ -13,6 +13,14 @@ function Listar(props) {
     const { location: { state: { pesquisa } = "" } = {} } = props;
 
     const [processos, setProcessos] = useState([]);
+    const [processoSelecionado, setProcessoSelecionado] = useState({});
+    const [detalhe, setDetalhe] = useState(true);
+
+    const handleSetProcesso = (processo) => {
+        setDetalhe(detalhe);
+        setProcessoSelecionado(processo)
+    }
+
     const [busca, setBusca] = useState(pesquisa);
 
     useEffect(() => {
@@ -70,71 +78,165 @@ function Listar(props) {
                                 height: "2.5rem",
                                 borderRadius: 0,
                             }}
-                        >Novo</Button>
+                        >Novo {detalhe && <>[[ detalhee ]] </>} [[{processoSelecionado.id}]]</Button>
                     </Grid>
                 </Grid>
             </Box>
 
             <Box mb={2} elevation={0}>
 
-                {processos.length > 0 && processos.map((processo, i) => (
-                    <Grid container spacing={2} alignItems="flex-end" key={i}>
+                <Grid container spacing={2} alignItems="flex-start" style={{ border: "0px solid green" }}>
+                    <Grid item xs={1} />
+                    <Grid item xs={(detalhe && 4) || 10} >
+
+                        {processos.length > 0 && processos.map((processo, i) => (
+                            <Grid container spacing={2} alignItems="flex-start" key={i} style={{ border: "0px solid red" }}>
+
+                                <Grid item xs={12} >
+
+
+
+                                    
+                                    <Card variant="outlined"
+                                        style={{ border: "1px solid #005b95", cursor: "pointer" }}
+                                        onClick={(e) => handleSetProcesso(processo)}>
+                                        <CardContent>
+
+
+                                            <Grid container alignItems="flex-start">
+
+                                                {!detalhe &&
+                                                    <Grid item xs={1} >
+                                                        <Avatar variant="square"
+                                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkWFnt8-03BhQJzLon1y0PV3ZqcfHWysoJg&usqp=CAU"
+                                                            style={{ height: '70px', width: '70px' }} />
+                                                    </Grid>
+                                                }
+
+                                                <Grid item xs={(detalhe && 6) || 2} style={{ padding: "0.1rem" }} >
+                                                    <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                        Número
+                                                    </Typography>
+                                                    <Typography variant="body2" component="p">
+                                                        {processo.numero}
+                                                    </Typography>
+                                                </Grid>
+
+                                                <Grid item xs={(detalhe && 6) || 3} style={{ padding: "0.1rem" }} >
+                                                    <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                        Assunto
+                                                    </Typography>
+                                                    <Typography variant="body2" component="p">
+                                                        {processo.assunto}
+                                                    </Typography>
+                                                </Grid>
+
+                                                <Grid item xs={(detalhe && 6) || 3} style={{ padding: "0.1rem" }} >
+                                                    <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                        Interessado
+                                                    </Typography>
+                                                    <Typography variant="body2" component="p">
+                                                        {processo.interessados[0]}
+                                                    </Typography>
+                                                </Grid>
+
+                                                {!detalhe &&
+                                                    <Grid item xs={3}>
+                                                        <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                            Descrição
+                                                        </Typography>
+                                                        <Typography variant="body2" component="p" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
+                                                            {processo.descricao}
+                                                        </Typography>
+                                                    </Grid>
+                                                }
+                                            </Grid>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    {!detalhe &&
                         <Grid item xs={1} />
-                        <Grid item xs={10} >
-                            <Card variant="outlined">
-                                <CardContent>
+                    }
 
-                                    <Grid container spacing={2} alignItems="flex-start">
+                    {detalhe &&
+                        <Grid item xs={7} >
+                            <Box mb={2} elevation={1}>
+                                <Grid container spacing={2} alignItems="center" style={{ padding: "0.8rem", border: "0px solid red" }}>
 
-                                        <Grid item xs={1} >
+                                    <Grid item xs={2}>
+                                        <Grid item xs={12}>
                                             <Avatar variant="square"
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkWFnt8-03BhQJzLon1y0PV3ZqcfHWysoJg&usqp=CAU"
-                                                style={{ height: '70px', width: '70px' }} />
+                                                style={{ height: 'auto', width: 'auto', textAlign: "center", alignSelf: 'center' }}
+                                            />
                                         </Grid>
-
-                                        <Grid item xs={2} >
-                                            <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
-                                                Número
-                                            </Typography>
-                                            <Typography variant="body2" component="p">
-                                                {processo.numero}
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={3} >
-                                            <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
-                                                Assunto
-                                            </Typography>
-                                            <Typography variant="body2" component="p">
-                                                {processo.assunto}
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={3} >
-                                            <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
-                                                Interessado
-                                            </Typography>
-                                            <Typography variant="body2" component="p">
-                                                {processo.interessados[0]}
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={3} >
-                                            <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
-                                                Descrição
-                                            </Typography>
-                                            <Typography variant="body2" component="p" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
-                                                {processo.descricao}
-                                            </Typography>
-                                        </Grid>
-
                                     </Grid>
-                                </CardContent>
-                            </Card>
+
+                                    <Grid item xs={10}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={6}>
+                                                <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                    Processo
+                                                </Typography>
+                                                <Typography variant="body2" component="p">
+                                                    {processoSelecionado.numero}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                    Data
+                                                </Typography>
+                                                <Typography variant="body2" component="p">
+                                                    {processoSelecionado.entrada}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                                    Assunto
+                                                </Typography>
+                                                <Typography variant="body2" component="p">
+                                                    {processoSelecionado.assunto}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={1} style={{ padding: "0.5rem" }}>
+                                        <Typography color="textSecondary" style={{ fontWeight: "bold" }}>
+                                            Interresados
+                                        </Typography>
+
+                                        <Grid container >
+                                            {processoSelecionado.interessados && processoSelecionado.interessados.map((interessado, i) => (
+                                                <Grid item xs={6}>
+                                                    <Typography variant="body2" >
+                                                        {interessado}
+                                                    </Typography>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container xs={12} spacing={1} style={{ padding: "0.5rem" }}>
+                                        <Typography color="textSecondary" display="block" style={{ fontWeight: "bold" }}>
+                                            Descrição
+                                        </Typography>
+                                        <Typography variant="body2" component="p">
+                                            {processoSelecionado.descricao}
+                                        </Typography>
+                                    </Grid>
+
+                                </Grid>
+                            </Box>
                         </Grid>
-                        <Grid item xs={1} />
-                    </Grid>
-                ))}
+                    }
+
+                </Grid>
+
+
                 {processos.length === 0 &&
                     <Grid container spacing={2} alignItems="flex-end">
                         <Grid item xs={1} />
