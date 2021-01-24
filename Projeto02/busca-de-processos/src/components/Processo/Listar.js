@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import ProcessoService from "../../services";
+import { Link } from 'react-router-dom';
 import {
     Avatar,
     Box, Button, Card, CardActions, CardHeader, CardContent, Grid, IconButton, InputAdornment,
     Paper, TextField, Typography,
 } from "@material-ui/core";
+
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from '@material-ui/icons/CloseRounded';
 import "../../pages/Home/index.css";
@@ -36,6 +38,22 @@ function Listar(props) {
             // return processos
             // console.log(JSON.stringify(processos))
         }).catch(error => alert(error));
+
+    }
+    
+    const handleEditarProcesso = () => {
+
+        alert("Editar")
+        // const resultado = window.confirm(`Deseja excluir o processo: ${processoSelecionado.numero}`);
+        // if (resultado === true) {
+        //     ProcessoService.excluirProcesso(processoSelecionado.id).then((retorno) => {
+
+        //         alert("Processo excluído com sucesso.");
+        //         setDetalhe(false);
+        //         handleBuscarProcessos();
+
+        //     }).catch(error => alert(error));
+        // }
 
     }
 
@@ -89,12 +107,19 @@ function Listar(props) {
                     </Grid>
 
                     <Grid item xs={7}>
-                        <Button variant="outlined" size="medium"
-                            style={{
+
+                        <Button
+                            component={Link} to={{
+                                pathname: "/cadastrar",
+                                state: { processo: processoSelecionado }
+                            }}
+                            variant="outlined" size="medium" style={{
                                 height: "2.5rem",
                                 borderRadius: 0,
-                            }}
-                        >Novo {detalhe && <>[[ detalhee ]] </>} [[{processoSelecionado.id}]]</Button>
+                            }}>
+                            Novo
+                        </Button>
+
                     </Grid>
                 </Grid>
             </Box>
@@ -252,31 +277,20 @@ function Listar(props) {
                                         variant="contained"
                                         size="small"
                                         onClick={(e) => handleExcluirProcesso()}
-                                        // onClick={handleExcluirProcesso}
-                                        // style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
                                         type="button">Remover
                                     </Button>
                                     <Button
                                         variant="contained"
                                         size="small"
-                                        // onClick={handleAdicionarNovoInteressado}
-                                        // style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
+                                        onClick={(e) => handleEditarProcesso()}
                                         style={{ margin: '16px' }}
                                         type="button">Editar
                                     </Button>
-
-
                                 </CardActions>
-
                             </Card>
-
-
-
                         </Grid>
                     }
-
                 </Grid>
-
 
                 {processos.length === 0 &&
                     <Grid container spacing={2} alignItems="flex-end">
