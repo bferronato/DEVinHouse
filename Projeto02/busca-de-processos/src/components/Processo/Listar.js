@@ -16,13 +16,12 @@ function Listar(props) {
     const [processos, setProcessos] = useState([]);
     const [processoSelecionado, setProcessoSelecionado] = useState({});
     const [detalhe, setDetalhe] = useState(false);
+    const [busca, setBusca] = useState(pesquisa);
 
     const handleSetProcesso = (processo) => {
         setDetalhe(true);
-        setProcessoSelecionado(processo)
+        setProcessoSelecionado(processo);
     }
-
-    const [busca, setBusca] = useState(pesquisa);
 
     useEffect(() => {
         handleBuscarProcessos();
@@ -32,10 +31,26 @@ function Listar(props) {
 
         ProcessoService.buscarProcessos(busca).then(processos => {
             if (processos) {
-                setProcessos(processos)
+                setProcessos(processos);
             }
-            console.log(JSON.stringify(processos))
+            // return processos
+            // console.log(JSON.stringify(processos))
         }).catch(error => alert(error));
+
+    }
+
+    const handleExcluirProcesso = () => {
+
+        const resultado = window.confirm(`Deseja excluir o processo: ${processoSelecionado.numero}`);
+        if (resultado === true) {
+            ProcessoService.excluirProcesso(processoSelecionado.id).then((retorno) => {
+
+                alert("Processo excluído com sucesso.");
+                setDetalhe(false);
+                handleBuscarProcessos();
+
+            }).catch(error => alert(error));
+        }
 
     }
 
@@ -95,17 +110,11 @@ function Listar(props) {
 
                                 <Grid item xs={12} >
 
-
-
-
                                     <Card variant="outlined"
                                         style={{ border: "1px solid #005b95", cursor: "pointer" }}
                                         onClick={(e) => handleSetProcesso(processo)}>
                                         <CardContent>
-
-
                                             <Grid container alignItems="flex-start">
-
                                                 {!detalhe &&
                                                     <Grid item xs={1} >
                                                         <Avatar variant="square"
@@ -174,9 +183,8 @@ function Listar(props) {
                                         />
                                     }
                                     action={
-                                        <IconButton aria-label="settings">
-                                            <CloseIcon 
-                                            onClick={(e) => setDetalhe(false)}></CloseIcon>
+                                        <IconButton onClick={(e) => setDetalhe(false)} aria-label="settings">
+                                            <CloseIcon />
                                         </IconButton>
                                     }
                                     title={
@@ -243,7 +251,8 @@ function Listar(props) {
                                     <Button
                                         variant="contained"
                                         size="small"
-                                        // onClick={handleAdicionarNovoInteressado}
+                                        onClick={(e) => handleExcluirProcesso()}
+                                        // onClick={handleExcluirProcesso}
                                         // style={{ margin: '0 12px 4px', backgroundColor: "rgb(196 196 196)", color: "white", fontWeight: "bolder" }}
                                         type="button">Remover
                                     </Button>

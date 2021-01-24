@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 
 // const ambiente = process.env.PUBLIC_URL;
-console.log(routes)
-console.log(JSON.stringify(routes))
+// console.log(routes)
+// console.log(JSON.stringify(routes))
 
 ReactDOM.render(
   <Router basename={process.env.PUBLIC_URL}>

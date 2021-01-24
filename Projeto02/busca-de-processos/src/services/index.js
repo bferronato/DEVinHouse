@@ -14,47 +14,29 @@ const ProcessoService = {
     },
 
     buscarProcessos(q = "") {
-        try {
-            return axios.get(`${BASE_URL}?q=${q}`)
-                .then(response => response.data)
-                .catch(error => {
-                    throw error
-                });
-        } catch (error) {
-            throw error;
-        }
+        return axios.get(`${BASE_URL}?q=${q}`)
+            .then(response => response.data)
+            .catch(error => {
+                throw error
+            });
+    },
+
+    excluirProcesso(id) {
+        return axios.delete(`${BASE_URL}/${id}`)
+            .catch(error => {
+                throw error;
+            });
+    },
+
+    editarProcesso(id) {
+        // Backend ainda não implementado
+        return axios.get(`${BASE_URL}/${id}`)
+            .then(response => response.data)
+            .catch(error => {
+                throw error
+            });
     }
 
-    // buscarFilmes() {
-    //     return axios.get(BASE_URL)
-    //         .then(response => response.data)
-    //         .catch(error => {
-    //             throw error
-    //         });
-    // },
-
-
-
-    // inserirFilme(filme) {
-    //     return axios.post(BASE_URL, filme)
-    //         .catch(error => {
-    //             throw error;
-    //         });
-    // },
-
-    // atualizarFilme(filme) {
-    //     return axios.put(BASE_URL, filme)
-    //         .catch(error => {
-    //             throw error;
-    //         });
-    // },
-
-    // excluirFilme(id) {
-    // 	return axios.delete(`${BASE_URL}/${id}`)
-    //         .catch(error => {
-    // 			throw error;
-    // 		});
-    // }
 }
 
 export default ProcessoService;

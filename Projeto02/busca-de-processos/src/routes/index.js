@@ -13,7 +13,7 @@ const routes = [
         exact: true
     },
     {
-        path: '/listar', // path: '/processo/cadastro/:id?',
+        path: '/listar',
         component: Listar
     }
    ,

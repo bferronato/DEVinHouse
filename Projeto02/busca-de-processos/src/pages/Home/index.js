@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ProcessoService from "../../services";
-// import { BrowserRouter as Router, Redirect, Route, Switch, Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -36,7 +35,7 @@ function Home() {
 
   const [open, setOpen] = useState(false);
 
-  const [pesquisa, setPesquisa] = useState("SOFT 2021/00001");
+  const [pesquisa, setPesquisa] = useState("");
 
   const [novoInteressado, setNovoInteressado] = useState("");
 
