@@ -76,10 +76,9 @@ function Home() {
           gutterBottom
           align="center"
           className="label"
-        >Você pode criar um novo processo
-        <Link to={{
+        >Você pode criar um novo processo <Link to={{
             pathname: "/cadastrar",
-          }} > clicando aqui </Link>
+          }}>clicando aqui</Link>
         </Typography>
       </Box>
     </Box>

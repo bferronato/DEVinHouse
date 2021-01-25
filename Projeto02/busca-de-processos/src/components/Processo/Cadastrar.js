@@ -20,18 +20,16 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const PROCESSO_INICIAL = {
-  descricao: "",
-  assunto: "",
-  interessados: []
+  descricao: "Teste",
+  assunto: "testes",
+  interessados: ["Bruno", "Maria", "Joana", "Carla"]
 }
 
 function Cadastrar(props) {
 
-  const [processo, setProcesso] = useState({
-    descricao: "Teste",
-    assunto: "testes",
-    interessados: ["Bruno", "Maria", "Joana", "Carla"]
-  });
+  const { location: { state: { processo: processoEdicao } = "" } = {} } = props;
+
+  const [processo, setProcesso] = useState(processoEdicao || PROCESSO_INICIAL);
 
   const [novoInteressado, setNovoInteressado] = useState("");
 
@@ -41,7 +39,7 @@ function Cadastrar(props) {
         ...processo,
         "interessados": [...processo.interessados, novoInteressado]
       }));
-      setNovoInteressado("")
+      setNovoInteressado("");
     }
   };
 
@@ -61,8 +59,17 @@ function Cadastrar(props) {
     }));
   };
 
-  const handleCadastrarProcesso = () => {
+  const handleSalvarProcesso = () => {
 
+    if (processoEdicao) {
+      editarProcesso();
+    } else {
+      salvarProcesso();
+    }
+
+  }
+
+  const salvarProcesso = () => {
     ProcessoService.cadastrarProcesso(processo).then(processo => {
       if (processo.status === 201) {
         alert("Processo cadastrado com sucesso.");
@@ -72,7 +79,10 @@ function Cadastrar(props) {
         alert("Erro ao cadastrar o processo.");
       }
     }).catch(error => alert(error));
+  }
 
+  const editarProcesso = () => {
+    alert("Backend ainda não implementado")
   }
 
   const fecharFormProcesso = () => {
@@ -88,7 +98,7 @@ function Cadastrar(props) {
       maxWidth="sm"
       aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
-        Cadastro de processo {processo.descricao}
+        {processoEdicao ? "Edição" : "Cadastro"} de processo
       </DialogTitle>
       <DialogContent>
         <Grid container direction="row" justify="flex-start" alignItems="flex-end">
@@ -160,7 +170,7 @@ function Cadastrar(props) {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCadastrarProcesso} variant="contained" color="primary">
+        <Button onClick={handleSalvarProcesso} variant="contained" color="primary">
           Salvar
           </Button>
       </DialogActions>

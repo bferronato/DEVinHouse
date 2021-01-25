@@ -35,25 +35,7 @@ function Listar(props) {
             if (processos) {
                 setProcessos(processos);
             }
-            // return processos
-            // console.log(JSON.stringify(processos))
         }).catch(error => alert(error));
-
-    }
-    
-    const handleEditarProcesso = () => {
-
-        alert("Editar")
-        // const resultado = window.confirm(`Deseja excluir o processo: ${processoSelecionado.numero}`);
-        // if (resultado === true) {
-        //     ProcessoService.excluirProcesso(processoSelecionado.id).then((retorno) => {
-
-        //         alert("Processo excluído com sucesso.");
-        //         setDetalhe(false);
-        //         handleBuscarProcessos();
-
-        //     }).catch(error => alert(error));
-        // }
 
     }
 
@@ -62,12 +44,11 @@ function Listar(props) {
         const resultado = window.confirm(`Deseja excluir o processo: ${processoSelecionado.numero}`);
         if (resultado === true) {
             ProcessoService.excluirProcesso(processoSelecionado.id).then((retorno) => {
-
-                alert("Processo excluído com sucesso.");
                 setDetalhe(false);
                 handleBuscarProcessos();
-
-            }).catch(error => alert(error));
+            }).catch(
+                error => alert(error)
+            );
         }
 
     }
@@ -110,12 +91,11 @@ function Listar(props) {
 
                         <Button
                             component={Link} to={{
-                                pathname: "/cadastrar",
-                                state: { processo: processoSelecionado }
+                                pathname: "/cadastrar"
                             }}
                             variant="outlined" size="medium" style={{
                                 height: "2.5rem",
-                                borderRadius: 0,
+                                borderRadius: 0
                             }}>
                             Novo
                         </Button>
@@ -274,17 +254,26 @@ function Listar(props) {
 
                                 <CardActions style={{ justifyContent: 'flex-end' }} >
                                     <Button
-                                        variant="contained"
-                                        size="small"
+                                        variant="outlined"
+                                        size="medium"
                                         onClick={(e) => handleExcluirProcesso()}
-                                        type="button">Remover
+                                        style={{
+                                            height: "2.5rem",
+                                            borderRadius: 0
+                                        }}>Remover
                                     </Button>
                                     <Button
-                                        variant="contained"
-                                        size="small"
-                                        onClick={(e) => handleEditarProcesso()}
-                                        style={{ margin: '16px' }}
-                                        type="button">Editar
+                                        variant="outlined"
+                                        size="medium"
+                                        component={Link}
+                                        to={{
+                                            pathname: "/cadastrar",
+                                            state: { processo: processoSelecionado }
+                                        }}
+                                        style={{
+                                            height: "2.5rem",
+                                            borderRadius: 0
+                                        }}>Editar
                                     </Button>
                                 </CardActions>
                             </Card>

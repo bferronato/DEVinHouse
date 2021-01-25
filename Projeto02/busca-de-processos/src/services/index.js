@@ -28,13 +28,13 @@ const ProcessoService = {
             });
     },
 
-    editarProcesso(id) {
+    editarProcesso(processo) {
         // Backend ainda não implementado
-        return axios.get(`${BASE_URL}/${id}`)
-            .then(response => response.data)
-            .catch(error => {
-                throw error
-            });
+        try {
+            return axios.post(BASE_URL, processo);
+        } catch (error) {
+            throw error;
+        }
     }
 
 }
