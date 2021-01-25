@@ -13,11 +13,30 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
+
   TextField,
   Typography
 } from "@material-ui/core";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
 
+import { withStyles } from '@material-ui/core/styles'
 import DeleteIcon from "@material-ui/icons/Delete";
+import CloseIcon from '@material-ui/icons/CloseRounded';
+
+// const styles = theme => ({
+//   root: {
+//     margin: 0,
+//     padding: theme.spacing(3)
+//   },
+//   closeButton: {
+//     position: "absolute",
+//     right: theme.spacing(1),
+//     top: theme.spacing(2),
+//     color: theme.palette.grey[500]
+//   }
+// });
 
 const PROCESSO_INICIAL = {
   descricao: "Teste",
@@ -30,7 +49,7 @@ function Cadastrar(props) {
   const { location: { state: { processo: processoEdicao } = "" } = {} } = props;
 
   const [processo, setProcesso] = useState(processoEdicao || PROCESSO_INICIAL);
-
+  const [open, setOpen] = useState(false);
   const [novoInteressado, setNovoInteressado] = useState("");
 
   const handleAdicionarNovoInteressado = () => {
@@ -95,9 +114,15 @@ function Cadastrar(props) {
       fullWidth
       maxWidth="sm"
       aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">
-        {processoEdicao ? "Edição" : "Cadastro"} de processo
-      </DialogTitle>
+
+      <MuiDialogTitle disableTypography style={{ margin: 0, padding: "0.8rem" }}>
+        <Typography variant="h6">{processoEdicao ? "Edição" : "Cadastro"} de processo</Typography>
+
+        <IconButton style={{ position: "absolute", right: "1px", top: "1px" }} onClick={fecharFormProcesso}>
+          <CloseIcon />
+        </IconButton>
+      </MuiDialogTitle>
+
       <DialogContent>
         <Grid container direction="row" justify="flex-start" alignItems="flex-end">
           <Grid item xs={6}>
