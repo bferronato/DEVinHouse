@@ -286,7 +286,7 @@ function Listar(props) {
                         <Grid item xs={1} />
                         <Grid item xs={11} >
                             <Box mb={2} elevation={1}>
-                                Nenhum Processo localizado
+                                Nenhum processo localizado
                             </Box>
                         </Grid>
                     </Grid>

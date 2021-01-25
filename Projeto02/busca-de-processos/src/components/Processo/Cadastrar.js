@@ -21,7 +21,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 const PROCESSO_INICIAL = {
   descricao: "Teste",
-  assunto: "testes",
+  assunto: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
   interessados: ["Bruno", "Maria", "Joana", "Carla"]
 }
 
@@ -60,13 +60,11 @@ function Cadastrar(props) {
   };
 
   const handleSalvarProcesso = () => {
-
     if (processoEdicao) {
       editarProcesso();
     } else {
       salvarProcesso();
     }
-
   }
 
   const salvarProcesso = () => {
@@ -82,7 +80,7 @@ function Cadastrar(props) {
   }
 
   const editarProcesso = () => {
-    alert("Backend ainda não implementado")
+    alert("Backend não implementado");
   }
 
   const fecharFormProcesso = () => {
@@ -170,7 +168,13 @@ function Cadastrar(props) {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSalvarProcesso} variant="contained" color="primary">
+        <Button onClick={handleSalvarProcesso} variant="contained" style={{
+          height: "2.5rem",
+          backgroundColor: "#005b95",
+          color: "white",
+          fontWeight: "bold",
+          borderRadius: 0
+        }}>
           Salvar
           </Button>
       </DialogActions>

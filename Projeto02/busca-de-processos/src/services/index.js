@@ -29,12 +29,8 @@ const ProcessoService = {
     },
 
     editarProcesso(processo) {
-        // Backend ainda não implementado
-        try {
-            return axios.post(BASE_URL, processo);
-        } catch (error) {
-            throw error;
-        }
+        // Backend não implementado
+        return;
     }
 
 }
