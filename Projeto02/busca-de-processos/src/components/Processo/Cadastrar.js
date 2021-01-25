@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import ProcessoService from "../../services";
 import {
@@ -6,42 +5,23 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   Grid,
   IconButton,
   List,
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-
   TextField,
   Typography
 } from "@material-ui/core";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-
-import { withStyles } from '@material-ui/core/styles'
 import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from '@material-ui/icons/CloseRounded';
 
-// const styles = theme => ({
-//   root: {
-//     margin: 0,
-//     padding: theme.spacing(3)
-//   },
-//   closeButton: {
-//     position: "absolute",
-//     right: theme.spacing(1),
-//     top: theme.spacing(2),
-//     color: theme.palette.grey[500]
-//   }
-// });
-
 const PROCESSO_INICIAL = {
-  descricao: "Teste",
-  assunto: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-  interessados: ["Bruno", "Maria", "Joana", "Carla"]
+  descricao: "",
+  assunto: "",
+  interessados: []
 }
 
 function Cadastrar(props) {
@@ -49,7 +29,7 @@ function Cadastrar(props) {
   const { location: { state: { processo: processoEdicao } = "" } = {} } = props;
 
   const [processo, setProcesso] = useState(processoEdicao || PROCESSO_INICIAL);
-  const [open, setOpen] = useState(false);
+
   const [novoInteressado, setNovoInteressado] = useState("");
 
   const handleAdicionarNovoInteressado = () => {
@@ -141,7 +121,7 @@ function Cadastrar(props) {
           <Grid item xs={6}>
             <Typography variant="h6" className="MuiFormLabel-root MuiInputLabel-shrink" >
               Interessados
-              </Typography>
+            </Typography>
             {processo.interessados.length > 0 && <List dense style={{ padding: '0.5rem 0 0' }} >
               {processo.interessados.map((linha, i) => (
                 <ListItem key={i} alignItems="flex-start" style={{ padding: '0.1rem' }} >
