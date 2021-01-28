@@ -1,0 +1,3 @@
+Na operação cancelar pedido do exercício anterior existe uma validação em que o pedido não 
+pode ser cancelado caso o mesmo já tenha sido enviado. Qual código HTTP deve ser retornado nessa situação?
+405 (Method Not Allowed)

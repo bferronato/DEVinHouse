@@ -1,0 +1,4 @@
+Em uma API Rest responsável pelo CRUD de pessoas, ao invocar a operação “POST /pessoas” 
+informando os dados necessários, temos como retorno o status code HTTP 201.
+Dado o código de retorno, qual foi o resultado da operação?
+Pessoa criada.

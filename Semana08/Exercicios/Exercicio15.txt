@@ -1,0 +1,3 @@
+Dado a API REST hipotética de pedidos do exercício anterior, escreva uma URI com o 
+método HTTP correspondente para uma operação que deverá remover um item do pedido.
+DELETE /pedido/item/{idItem}

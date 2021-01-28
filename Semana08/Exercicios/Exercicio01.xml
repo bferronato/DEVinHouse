@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedido>
+    <cliente>Bruno</cliente>
+    <endereco>Lagoa da Conceição</endereco>
+    <itens>
+        <item prato="Burrito" valor="25.00" quantidade="1" />
+        <item prato="Nachos" valor="10.00" quantidade="1" />
+        <item prato="Guaca mole" valor="5.00" quantidade="2" />
+    </itens>
+    <restaurante>
+        <![CDATA[ Mexicano`s ]]>
+    </restaurante>
+    <tempoEntrega>50min</tempoEntrega>
+    <cupom>20%</cupom>
+</pedido>

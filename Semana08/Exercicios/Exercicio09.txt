@@ -1,0 +1,2 @@
+Ao executar a chamada de uma operação REST o código HTTP 404 é retornado. O que pode ter causado esse retorno?
+O recurso solicitado não foi localizado.

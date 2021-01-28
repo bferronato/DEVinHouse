@@ -1,0 +1,24 @@
+{
+    "cliente": "Bruno",
+    "endereco": "Lagoa da Conceição",
+    "itens": [
+       {
+          "prato": "Burrito",
+          "valor": "25.00",
+          "quantidade": "1"
+       },
+       {
+          "prato": "Nachos",
+          "valor": "10.00",
+          "quantidade": "1"
+       },
+       {
+          "prato": "Guaca mole",
+          "valor": "5.00",
+          "quantidade": "2"
+       }
+    ],
+    "restaurante": "Mexicano`s",
+    "tempoEntrega": "50min",
+    "cupom": "20%"
+ }

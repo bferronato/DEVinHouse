@@ -1,0 +1,20 @@
+Dado a API REST hipotética de pedidos. Escreva a URI, método HTTP e JSON de retorno para uma 
+operação que deverá retornar o cardápio de um restaurante.
+GET /restaurante/cardapio/{nomeRestaurante}
+[
+    {
+        "prato":"Sushi",
+        "valor":"15.00",
+        "quantidade":"10 peças"
+    },
+    {
+        "prato":"Sashimi",
+        "valor":"25.00",
+        "quantidade":"15 peças"
+    },
+    {
+        "prato":"Temaki",
+        "valor":"20.00",
+        "quantidade":"1 unidade"
+    }
+]

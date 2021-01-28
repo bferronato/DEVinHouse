@@ -1,0 +1,2 @@
+Dado a operação “GET /pessoas/deletePessoa/{idPessoa}” sugira melhorias seguindo as boas práticas visto em aula.
+Alterar a operação de GET para DELETE

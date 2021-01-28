@@ -1,0 +1,2 @@
+Dado a operação “POST /pessoas/alteraPessoa”, sugira melhorias seguindo as boas práticas visto em aula.
+Alterar a operação de POST para PUT/PATCH

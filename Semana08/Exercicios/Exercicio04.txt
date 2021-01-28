@@ -1,0 +1,2 @@
+Em uma API Rest de CRUD, qual o método HTTP devemos utilizar na operação de edição de um registro?
+PUT/PATCH
