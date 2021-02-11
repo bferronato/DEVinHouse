@@ -1,6 +1,7 @@
 package basico;
 
 import java.util.Date;
+import java.util.Scanner;
 
 public class OlaMundo {
 
@@ -16,5 +17,17 @@ public class OlaMundo {
 
 		double altura = 1.72;
 		System.out.printf("Minha altrura é %.1f", altura);
+	
+		
+		Scanner teclado = new Scanner(System.in);
+		
+		String nome = teclado.nextLine();
+		
+//		Date data = new Date();
+
+		System.out.println(nome);
+		System.out.println("wqw");
+	
+	
 	}
 }
